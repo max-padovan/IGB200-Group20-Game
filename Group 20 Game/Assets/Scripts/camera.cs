@@ -7,60 +7,96 @@ using UnityEngine;
 
 public class camera : MonoBehaviour
 {
-    //GameObject cameraPrefab;
-    public int pos; //A way of determining where the camera should be for now
+ 
+    public bool home; //A way of determining where the camera should be for now
     private float panSpeed = 45; //how fast the panning is
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
-    private float zoomScale = 1.5f;
-    Quaternion angle;
+    private float zoomScale = 1.5f; //how quickly the player zooms when scrolling
+
+    //Angle vars
+    public Quaternion angle;
     float y;
     float x;
     float z;
+
+    //FOV vars
     float FOV;
+    float maxFOV = 60;
+    float minFOV = 25;
+
+    //LERP vars
+    float lerpSpeed = 0.05f;
+    float lerpTime = 1f;
+    float lerpProgress;
+    public Vector3 homePos;
+    public Vector3 camPos;
+    public Vector3 vel = Vector3.zero;
+    public Vector3 posi;
+    public Quaternion inspectAngle;
+    public Quaternion homeAngle;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        pos = 0; //Cam is in default position
+        //initialising some values
         angle = this.transform.rotation;
+        homeAngle = Quaternion.Euler(10, 0, 0);
+        inspectAngle = Quaternion.Euler(35, 0, 0);
+        homePos = transform.position;
+        home = true; //Cam is in default position
+ 
         z = 0;
         y = 0;
         x = 10;
         FOV = 60;
+        posi = homePos;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        angle = this.transform.rotation; //updates rotation data for the check method
 
-        angle = this.transform.rotation;
-        if (pos == 0)
+        //Condition for camera positions
+        if (home == true)
         {
-            
+            //normal cam functionality works
             Check();
             Zoom();
         }
-        
+        else
+        {
+            //for returning to home pos
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Move(homePos, false);
+                y = 0; 
+                home = true;
+            }
+        }
     }
 
-    private void Zoom()
+    private void Zoom() //camera zoom functionality
     {
         FOV -= Input.mouseScrollDelta.y * zoomScale;
-        if (FOV > 60) 
+
+        //conditions to limit zoom
+        if (FOV > maxFOV) 
         { 
-            FOV = 60;
+            FOV = maxFOV;
         }
-        else if (FOV < 25) 
+        else if (FOV < minFOV) 
         {
-            FOV = 25;
+            FOV = minFOV;
         }
         this.GetComponent<Camera>().fieldOfView = FOV;
     }
 
-    private void Check()
+    private void Check() //method to allow camera pan (might rename)
     {
+        //Checks pan restrictions
         if (angle.y < maxPanAngle) 
         {
             //can look right
@@ -81,5 +117,67 @@ public class camera : MonoBehaviour
             }
         }
     }
+    
+    public void Move(Vector3 pos, bool movingaway) //moves the camera to the vector3 pos, bool checks where it's going
+    {
+        if (movingaway)//moving away from home position
+        {
+            home = false;
+            this.GetComponent<Camera>().fieldOfView = maxFOV;//reset fov, little jarring **************
+            posi = new Vector3(pos.x, pos.y + 7, pos.z - 7); //offset to see whole planter
+            StartCoroutine(moveIn());
+
+        }
+        else //moving back to home position
+        {
+            StartCoroutine(moveBack());
+        }
+
+
+    }
+
+    //Lerp coroutine for smoothly moving cam to planter
+    IEnumerator moveIn()
+    {
+        lerpProgress = 0;
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = transform.rotation;
+        while (lerpProgress < lerpTime)
+        {
+            //was going to use SmoothDamp but it meant I had to redo some stuff. Might reconsider if the need arises
+            //transform.position = Vector3.SmoothDamp(currentPos, posi, ref vel, 0.5f);
+            transform.position = Vector3.Lerp(currentPos, posi, (lerpProgress / lerpTime));
+            transform.rotation = Quaternion.Lerp(currentRot, inspectAngle, (lerpProgress / lerpTime));
+            lerpProgress += Time.deltaTime;
+
+            yield return null;
+        }
+        transform.position = posi;
+
+        yield return null;
+    }
+
+    //Lerp coroutine for smoothly moving cam to home position
+    IEnumerator moveBack()
+    {
+        lerpProgress = 0;
+        Vector3 currentPos = transform.position;
+        while (lerpProgress < lerpTime)
+        {
+            transform.position = Vector3.Lerp(currentPos, homePos, (lerpProgress / lerpTime));
+            transform.rotation = Quaternion.Lerp(inspectAngle, homeAngle, (lerpProgress / lerpTime));
+            lerpProgress += Time.deltaTime;
+
+            yield return null;
+        }
+        transform.position = homePos;
+        transform.rotation = homeAngle;
+        angle = homeAngle;
+
+        yield return null;
+    }
+
+
+
 
 }
