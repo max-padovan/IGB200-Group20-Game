@@ -19,13 +19,6 @@ public class planter : MonoBehaviour
         Debug.Log(original);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     void OnMouseOver()
     {
         mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder

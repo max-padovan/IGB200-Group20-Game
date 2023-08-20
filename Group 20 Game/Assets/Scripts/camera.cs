@@ -7,8 +7,7 @@ using UnityEngine;
 
 public class camera : MonoBehaviour
 {
- 
-    public bool home; //A way of determining where the camera should be for now
+    public bool isHome; //A way of determining where the camera should be for now
     private float panSpeed = 45; //how fast the panning is
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
     private float zoomScale = 1.5f; //how quickly the player zooms when scrolling
@@ -44,14 +43,13 @@ public class camera : MonoBehaviour
         homeAngle = Quaternion.Euler(10, 0, 0);
         inspectAngle = Quaternion.Euler(35, 0, 0);
         homePos = transform.position;
-        home = true; //Cam is in default position
+        isHome = true; //Cam is in default position
  
         z = 0;
         y = 0;
         x = 10;
         FOV = 60;
         posi = homePos;
-        
     }
 
     // Update is called once per frame
@@ -60,10 +58,10 @@ public class camera : MonoBehaviour
         angle = this.transform.rotation; //updates rotation data for the check method
 
         //Condition for camera positions
-        if (home == true)
+        if (isHome == true)
         {
             //normal cam functionality works
-            Check();
+            Pan();
             Zoom();
         }
         else
@@ -73,7 +71,7 @@ public class camera : MonoBehaviour
             {
                 Move(homePos, false);
                 y = 0; 
-                home = true;
+                isHome = true;
             }
         }
     }
@@ -94,7 +92,7 @@ public class camera : MonoBehaviour
         this.GetComponent<Camera>().fieldOfView = FOV;
     }
 
-    private void Check() //method to allow camera pan (might rename)
+    private void Pan()
     {
         //Checks pan restrictions
         if (angle.y < maxPanAngle) 
@@ -122,18 +120,15 @@ public class camera : MonoBehaviour
     {
         if (movingaway)//moving away from home position
         {
-            home = false;
+            isHome = false;
             this.GetComponent<Camera>().fieldOfView = maxFOV;//reset fov, little jarring **************
             posi = new Vector3(pos.x, pos.y + 7, pos.z - 7); //offset to see whole planter
             StartCoroutine(moveIn());
-
         }
         else //moving back to home position
         {
             StartCoroutine(moveBack());
         }
-
-
     }
 
     //Lerp coroutine for smoothly moving cam to planter
@@ -176,8 +171,4 @@ public class camera : MonoBehaviour
 
         yield return null;
     }
-
-
-
-
 }
