@@ -6,8 +6,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638270560456944712
-    m_Hash: 1164529822
+      ticks: 638282627605086841
+    m_Hash: 1525443029
   m_LockFileStatus:
     m_FilePath: C:/Users/Max Padovan/Documents/GitHub/IGB200-Group20-Game/Group 20
       Game/Packages/packages-lock.json
@@ -15,8 +15,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638270560742538925
-    m_Hash: 1381362156
+      ticks: 638282627605086841
+    m_Hash: 683342763
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
