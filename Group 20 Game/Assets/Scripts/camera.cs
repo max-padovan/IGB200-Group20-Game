@@ -10,7 +10,7 @@ public class camera : MonoBehaviour
     public bool isHome; //A way of determining where the camera should be for now
     private float panSpeed = 45; //how fast the panning is
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
-    private float zoomScale = 1.5f; //how quickly the player zooms when scrolling.
+    private float zoomScale = 1.5f; //how quickly the player zooms when scrolling..
 
     //Angle vars
     public Quaternion angle;
