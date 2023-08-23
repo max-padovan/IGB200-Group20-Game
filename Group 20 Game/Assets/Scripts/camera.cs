@@ -12,8 +12,6 @@ public class camera : MonoBehaviour
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
     private float zoomScale = 1.5f; //how quickly the player zooms when scrolling..
 
-    private Vector3 mouseDragOrigin;
-
     //Angle vars
     public Quaternion currentAngle;
     float y;
@@ -93,14 +91,13 @@ public class camera : MonoBehaviour
 
     private void Pan()
     {
+        /*
         //Checks pan restrictions
         if (currentAngle.y < maxPanAngle) 
         {
             //can look right
-            if (Input.GetMouseButton(0))
+            if (Input.GetKey("d"))
             {
-                //detect if the mouse is moving (add a buffer so the player doesnt start moving when the click, and dont move when the cursor is over a clickable thing?
-                mouseDragOrigin = Input.mousePosition;
 
                 //scale the mouse 
                 
@@ -117,6 +114,12 @@ public class camera : MonoBehaviour
                 y -= Time.deltaTime * panSpeed;
                 this.transform.rotation = Quaternion.Euler(x, y, z);
             }
+        }
+        */
+
+        if (Input.GetMouseButton(0))
+        {
+            transform.eulerAngles += 5 * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
         }
     }
     

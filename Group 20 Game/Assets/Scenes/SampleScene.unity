@@ -893,8 +893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f001a30c06932498aa7d46ad5e7ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  home: 0
-  angle: {x: 0, y: 0, z: 0, w: 0}
+  isHome: 0
+  currentAngle: {x: 0, y: 0, z: 0, w: 0}
   homePos: {x: 0, y: 0, z: 0}
   camPos: {x: 0, y: 0, z: 0}
   vel: {x: 0, y: 0, z: 0}
