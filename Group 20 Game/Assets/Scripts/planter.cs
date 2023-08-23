@@ -35,7 +35,4 @@ public class planter : MonoBehaviour
     {
         mesh.material.color = original;
     }
-
-
-
 }

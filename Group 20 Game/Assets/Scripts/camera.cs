@@ -12,8 +12,10 @@ public class camera : MonoBehaviour
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
     private float zoomScale = 1.5f; //how quickly the player zooms when scrolling..
 
+    private Vector3 mouseDragOrigin;
+
     //Angle vars
-    public Quaternion angle;
+    public Quaternion currentAngle;
     float y;
     float x;
     float z;
@@ -34,17 +36,15 @@ public class camera : MonoBehaviour
     public Quaternion inspectAngle;
     public Quaternion homeAngle;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         //initialising some values
-        angle = this.transform.rotation;
+        currentAngle = this.transform.rotation;
         homeAngle = Quaternion.Euler(10, 0, 0);
         inspectAngle = Quaternion.Euler(35, 0, 0);
         homePos = transform.position;
         isHome = true; //Cam is in default position
- 
+
         z = 0;
         y = 0;
         x = 10;
@@ -52,10 +52,9 @@ public class camera : MonoBehaviour
         posi = homePos;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        angle = this.transform.rotation; //updates rotation data for the check method
+        currentAngle = this.transform.rotation; //updates rotation data for the check method
 
         //Condition for camera positions
         if (isHome == true)
@@ -95,17 +94,22 @@ public class camera : MonoBehaviour
     private void Pan()
     {
         //Checks pan restrictions
-        if (angle.y < maxPanAngle) 
+        if (currentAngle.y < maxPanAngle) 
         {
             //can look right
-            if (Input.GetKey("d")) // d for now, can add mouse edge screen later
+            if (Input.GetMouseButton(0))
             {
+                //detect if the mouse is moving (add a buffer so the player doesnt start moving when the click, and dont move when the cursor is over a clickable thing?
+                mouseDragOrigin = Input.mousePosition;
+
+                //scale the mouse 
+                
                 y += Time.deltaTime * panSpeed;
                 this.transform.rotation = Quaternion.Euler(x, y, z); //using Euler made this so much easier holy
             }
         }
 
-        if (angle.y > -maxPanAngle)
+        if (currentAngle.y > -maxPanAngle)
         {
             //can look left
             if (Input.GetKey("a")) // a for now, can add mouse edge screen later
@@ -167,7 +171,7 @@ public class camera : MonoBehaviour
         }
         transform.position = homePos;
         transform.rotation = homeAngle;
-        angle = homeAngle;
+        currentAngle = homeAngle;
 
         yield return null;
     }
