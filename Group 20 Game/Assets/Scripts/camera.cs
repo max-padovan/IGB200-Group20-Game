@@ -10,7 +10,11 @@ public class camera : MonoBehaviour
     public bool isHome; //A way of determining where the camera should be for now
     private float panSpeed = 45; //how fast the panning is
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
-    private float zoomScale = 1.5f; //how quickly the player zooms when scrolling..
+    private float zoomScale = 1.5f; //how quickly the player zooms when scrolling...
+
+    public bool canPan; //bool that checks if the player should be allowed to pan
+    public bool runningCoroutine; //bool that is true when a coroutine is running
+    public float mouseSensitivity = 3f; //changes the mouse pan sensitivity
 
     //Angle vars
     public Quaternion currentAngle;
@@ -42,6 +46,8 @@ public class camera : MonoBehaviour
         inspectAngle = Quaternion.Euler(35, 0, 0);
         homePos = transform.position;
         isHome = true; //Cam is in default position
+        canPan = true; //
+        runningCoroutine = false;
 
         z = 0;
         y = 0;
@@ -58,17 +64,21 @@ public class camera : MonoBehaviour
         if (isHome == true)
         {
             //normal cam functionality works
-            Pan();
-            Zoom();
+            if (canPan == true)
+            {
+                Pan();
+                Zoom();
+            }
+            
         }
         else
         {
             //for returning to home pos
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !runningCoroutine)
             {
                 Move(homePos, false);
-                y = 0; 
-                isHome = true;
+                y = 0;
+                isHome = true;               
             }
         }
     }
@@ -119,22 +129,28 @@ public class camera : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            transform.eulerAngles += 5 * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            transform.eulerAngles += mouseSensitivity * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
         }
     }
     
     public void Move(Vector3 pos, bool movingaway) //moves the camera to the vector3 pos, bool checks where it's going
     {
-        if (movingaway)//moving away from home position
+        if(!runningCoroutine)
         {
-            isHome = false;
-            this.GetComponent<Camera>().fieldOfView = maxFOV;//reset fov, little jarring **************
-            posi = new Vector3(pos.x, pos.y + 7, pos.z - 7); //offset to see whole planter
-            StartCoroutine(moveIn());
-        }
-        else //moving back to home position
-        {
-            StartCoroutine(moveBack());
+            runningCoroutine = true;
+            if (movingaway)//moving away from home position
+            {
+                isHome = false;
+                this.GetComponent<Camera>().fieldOfView = maxFOV;//reset fov, little jarring **************
+                posi = new Vector3(pos.x, pos.y + 7, pos.z - 7); //offset to see whole planter
+
+                StartCoroutine(moveIn());
+
+            }
+            else //moving back to home position
+            {
+                StartCoroutine(moveBack());
+            }
         }
     }
 
@@ -155,6 +171,7 @@ public class camera : MonoBehaviour
             yield return null;
         }
         transform.position = posi;
+        runningCoroutine = false;
 
         yield return null;
     }
@@ -175,6 +192,7 @@ public class camera : MonoBehaviour
         transform.position = homePos;
         transform.rotation = homeAngle;
         currentAngle = homeAngle;
+        runningCoroutine = false;
 
         yield return null;
     }

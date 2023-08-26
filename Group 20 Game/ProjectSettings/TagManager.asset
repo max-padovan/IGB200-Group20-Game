@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - planter
+  - shed
+  - shedUI
   layers:
   - Default
   - TransparentFX

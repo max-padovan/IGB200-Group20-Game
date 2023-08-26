@@ -1,22 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class planter : MonoBehaviour
+public class shed : MonoBehaviour
 {
     MeshRenderer mesh;
     Color original = Color.white;
     Color hoverCol = Color.gray;
-    public GameObject cam;
-    
+    public GameObject shedUI;
+    public camera cam;
     // Start is called before the first frame update
     void Start()
     {
-        cam = GameObject.Find("Main Camera");
+        //shedUI = GameObject.FindGameObjectWithTag("shedUI"); not gonna work if it starts toggled inactive, do it manually for now :)
         mesh = GetComponent<MeshRenderer>();
-        Debug.Log(original);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            shedUI.SetActive(false);
+            cam.canPan = true;
+
+        }
     }
 
     void OnMouseOver()
@@ -24,10 +32,8 @@ public class planter : MonoBehaviour
         mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Clicked planter!");
-            
-            //call function that moves camera to this location
-            cam.GetComponent<camera>().Move(this.transform.position,true);
+            shedUI.SetActive(true);
+            cam.canPan = false;
         }
     }
 
