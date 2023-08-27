@@ -38,6 +38,8 @@ public class camera : MonoBehaviour
     public Quaternion inspectAngle;
     public Quaternion homeAngle;
 
+    public GameObject planter;
+
     void Start()
     {
         //initialising some values
@@ -54,6 +56,8 @@ public class camera : MonoBehaviour
         x = 10;
         FOV = 60;
         posi = homePos;
+
+        //planter = GameObject.Find()
     }
 
     void Update()
@@ -69,7 +73,6 @@ public class camera : MonoBehaviour
                 Pan();
                 Zoom();
             }
-            
         }
         else
         {
@@ -129,7 +132,7 @@ public class camera : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            transform.eulerAngles += mouseSensitivity * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            transform.eulerAngles += mouseSensitivity * new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0);
         }
     }
     

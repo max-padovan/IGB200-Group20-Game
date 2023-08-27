@@ -10,6 +10,9 @@ public class planter : MonoBehaviour
     Color original = Color.white;
     Color hoverCol = Color.gray;
     public GameObject cam;
+
+    public bool insidePlanter = false;
+    public GameObject plantNode;
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +20,11 @@ public class planter : MonoBehaviour
         cam = GameObject.Find("Main Camera");
         mesh = GetComponent<MeshRenderer>();
         Debug.Log(original);
+    }
+
+    private void Update()
+    {
+        placePlantNode();
     }
 
     void OnMouseOver()
@@ -28,11 +36,29 @@ public class planter : MonoBehaviour
             
             //call function that moves camera to this location
             cam.GetComponent<camera>().Move(this.transform.position,true);
+
+            insidePlanter = true;
         }
     }
 
     void OnMouseExit()
     {
         mesh.material.color = original;
+        insidePlanter = false;
+    }
+
+    void placePlantNode()
+    {
+        if (Input.GetMouseButtonDown(0) && insidePlanter == true)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 nodePosition = hit.point;
+                Instantiate(plantNode, nodePosition, Quaternion.identity);
+            }
+        }
     }
 }
