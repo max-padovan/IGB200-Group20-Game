@@ -7,17 +7,33 @@ using UnityEngine.UI;
 
 public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerDownHandler
 {
+    public Item item; //what item this is going to be
+
     public Transform itemParent; //parent to the item being dragged
-    public Image item; //the ui element of the item
+    public Image image; //the ui element of the item
     public camera cam; //camera script
     public GameObject shedUI; //the ui part relating to shed storage
 
     // Start is called before the first frame update
+
+
+    
+    public void InitialiseItem(Item newItem)
+    {
+        image = this.GetComponent<Image>();
+        Debug.Log(newItem);
+        item = newItem;
+        image.sprite = newItem.icon;
+    }
     void Start()
     {
+        image = GetComponent<Image>();
         //assigning object references
         cam = GameObject.Find("Main Camera").GetComponent<camera>();
         shedUI = GameObject.Find("shedUI");
+
+        //for testing
+        //InitialiseItem(item);
     }
 
     // Update is called once per frame
@@ -36,7 +52,7 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         itemParent = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
-        item.raycastTarget = false;
+        image.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData) //while the player is dragging the item
@@ -47,7 +63,7 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnEndDrag(PointerEventData eventData) //when the player releases the drag
     {
         transform.SetParent(itemParent); 
-        item.raycastTarget = true;
+        image.raycastTarget = true;
         if(!shedUI.activeInHierarchy)
         {
             cam.canPan = true;
