@@ -11,12 +11,18 @@ public class planter : MonoBehaviour
     Color hoverCol = Color.gray;
     public GameObject cam;
 
+    public int shovelID = 1; //the current ID for the digging tool
+
+    public InventoryManager inventoryManager;
+
+
     public bool insidePlanter = false;
     public GameObject plantNode;
     
     // Start is called before the first frame update
     void Start()
     {
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         cam = GameObject.Find("Main Camera");
         mesh = GetComponent<MeshRenderer>();
         Debug.Log(original);
@@ -49,7 +55,10 @@ public class planter : MonoBehaviour
 
     void placePlantNode()
     {
-        if (Input.GetMouseButtonDown(0) && insidePlanter == true)
+        Item activeItem = inventoryManager.QuerySelectedItem(false);
+        Item shovel = inventoryManager.GetItemRef(1); //this number will change
+
+        if (Input.GetMouseButtonDown(0) && insidePlanter == true && activeItem == shovel)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

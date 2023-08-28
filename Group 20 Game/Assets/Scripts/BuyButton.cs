@@ -11,7 +11,15 @@ public class BuyButton : MonoBehaviour
     public void PickupItem(int id)
     {
         Debug.Log(item[id]);
-        inventoryManager.AddItem(item[id]);
+        bool result = inventoryManager.AddItem(item[id]);
+        if(result == true) 
+        {
+            Debug.Log("added");
+        }
+        else
+        {
+            Debug.Log("inv full");
+        } 
     }
     // Start is called before the first frame update
     void Start()

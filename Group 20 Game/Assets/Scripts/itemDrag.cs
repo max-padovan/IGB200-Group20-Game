@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerDownHandler
 {
     public Item item; //what item this is going to be
+    public int count = 1;
+    public Text countUI;
+    
 
     public Transform itemParent; //parent to the item being dragged
     public Image image; //the ui element of the item
@@ -16,14 +19,21 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     // Start is called before the first frame update
 
-
+    public void RefreshCount()
+    {
+        countUI.text = count.ToString();
+        bool textActive = count > 1;
+        countUI.gameObject.SetActive(textActive);
+    }
     
     public void InitialiseItem(Item newItem)
     {
-        image = this.GetComponent<Image>();
+        
+        //image = this.GetComponent<Image>();
         Debug.Log(newItem);
         item = newItem;
         image.sprite = newItem.icon;
+        RefreshCount();
     }
     void Start()
     {
