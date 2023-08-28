@@ -5,33 +5,19 @@ using UnityEngine;
 
 public class plantNode : MonoBehaviour
 {
-    public GameObject selectionplane;
+    public GameObject selectionPlane;
+    private GameObject selectionPlaneInstance;
 
-    void Update()
+    private void OnMouseEnter()
     {
-        ShowSelectionRing();
+        selectionPlaneInstance = Instantiate(selectionPlane, transform.position + new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), Quaternion.identity);
     }
 
-    private void ShowSelectionRing()
+    private void OnMouseExit()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
+        if (selectionPlaneInstance != null)
         {
-            if (hit.collider.gameObject == gameObject)
-            {
-                selectionplane.SetActive(true);
-                selectionplane.transform.position = hit.point + Vector3.up * 0.05f;
-            }
-            else
-            {
-                selectionplane.SetActive(false);
-            }
-        }
-        else
-        {
-            selectionplane.SetActive(false);
+            Destroy(selectionPlaneInstance);
         }
     }
 }

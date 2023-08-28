@@ -4579,6 +4579,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1692850233371184381, guid: 782e50d739713c343a81d2ace868679e, type: 3}
+      propertyPath: collisionLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2748645750867369289, guid: 782e50d739713c343a81d2ace868679e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5191803
