@@ -23,6 +23,9 @@ public class planter : MonoBehaviour
     private GameObject placeholderPlantNode;
 
     public Material validPlacementMaterial;
+
+    public Vector3 nodePosition;
+    public Grid grid;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,7 @@ public class planter : MonoBehaviour
     private void Update()
     {
         placePlantNode();
+        gridManager();
         
         //isHome is managed by the camera script and is changed there...
         camOverPlanter = !cam.isHome;
@@ -79,7 +83,7 @@ public class planter : MonoBehaviour
         placeholderPlantNode.SetActive(false);
     }
 
-    private void placePlantNode()
+    public void placePlantNode()
     {
         Item activeItem = inventoryManager.QuerySelectedItem(false);
         Item shovel = inventoryManager.GetItemRef(1); //this number will change
@@ -93,10 +97,10 @@ public class planter : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                Vector3 nodePosition = hit.point;
+                nodePosition = hit.point;
 
                 //Update the position of the visual rep of the plantNode
-                placeholderPlantNode.transform.position = nodePosition;
+                //placeholderPlantNode.transform.position = nodePosition;
                 
                 //places an actual plantNode
                 if (Input.GetMouseButtonDown(0))
@@ -109,5 +113,11 @@ public class planter : MonoBehaviour
         {
             placeholderPlantNode.SetActive(false);
         }
+    }
+
+    public void gridManager()
+    {
+        Vector3Int gridPosition = grid.WorldToCell(nodePosition);
+        placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition);
     }
 }
