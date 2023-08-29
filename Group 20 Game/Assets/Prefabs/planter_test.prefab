@@ -119,5 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  insidePlanter: 0
+  shovelID: 1
+  inventoryManager: {fileID: 0}
+  camOverPlanter: 0
+  mouseOverPlanter: 0
   plantNode: {fileID: 8432203718682733306, guid: 9b76df9e35338dd4e9c4c2716cfacb95, type: 3}
+  validPlacementMaterial: {fileID: 2100000, guid: 75d2b10deba094b45840190a1ad11df0, type: 2}

@@ -143,7 +143,7 @@ public class camera : MonoBehaviour
             runningCoroutine = true;
             if (movingaway)//moving away from home position
             {
-                isHome = false;
+                //isHome = false;
                 this.GetComponent<Camera>().fieldOfView = maxFOV;//reset fov, little jarring **************
                 posi = new Vector3(pos.x, pos.y + 7, pos.z - 7); //offset to see whole planter
 
@@ -175,6 +175,7 @@ public class camera : MonoBehaviour
         }
         transform.position = posi;
         runningCoroutine = false;
+        isHome = false;
 
         yield return null;
     }
