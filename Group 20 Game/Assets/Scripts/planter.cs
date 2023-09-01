@@ -25,7 +25,8 @@ public class planter : MonoBehaviour
     public Material validPlacementMaterial;
 
     public Vector3 nodePosition;
-    public Grid grid;
+
+    //public Grid grid;
     
     // Start is called before the first frame update
     void Start()
@@ -41,7 +42,7 @@ public class planter : MonoBehaviour
     private void Update()
     {
         placePlantNode();
-        gridManager();
+        //gridManager();
         
         //isHome is managed by the camera script and is changed there...
         camOverPlanter = !cam.isHome;
@@ -86,38 +87,44 @@ public class planter : MonoBehaviour
     public void placePlantNode()
     {
         Item activeItem = inventoryManager.QuerySelectedItem(false);
-        Item shovel = inventoryManager.GetItemRef(1); //this number will change
+        //Item shovel = inventoryManager.GetItemRef(1); //this number will change
 
-        if (camOverPlanter == true && mouseOverPlanter == true && activeItem == shovel)
+        if (activeItem != null) // just in case they aren't holding anything at all - avoid the error
         {
-            placeholderPlantNode.SetActive(true);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            //if the player has selected the planter (cam over it), has their mouse over the object (mouse over) and their tool has the dig type
+            if (camOverPlanter == true && mouseOverPlanter == true && activeItem.actionType == Item.ActionType.dig)
             {
-                nodePosition = hit.point;
+                placeholderPlantNode.SetActive(true);
 
-                //Update the position of the visual rep of the plantNode
-                //placeholderPlantNode.transform.position = nodePosition;
-                
-                //places an actual plantNode
-                if (Input.GetMouseButtonDown(0))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Instantiate(plantNode, nodePosition, Quaternion.identity);
+                    nodePosition = hit.point;
+
+                    //Update the position of the visual rep of the plantNode
+                    //placeholderPlantNode.transform.position = nodePosition;
+
+                    //places an actual plantNode
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Instantiate(plantNode, nodePosition, Quaternion.identity);
+                    }
                 }
             }
+            else
+            {
+                placeholderPlantNode.SetActive(false);
+            }
         }
-        else
-        {
-            placeholderPlantNode.SetActive(false);
-        }
+        
+        
     }
 
     public void gridManager()
     {
-        Vector3Int gridPosition = grid.WorldToCell(nodePosition);
-        placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition);
+        //Vector3Int gridPosition = grid.WorldToCell(nodePosition);
+        //placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition);
     }
 }

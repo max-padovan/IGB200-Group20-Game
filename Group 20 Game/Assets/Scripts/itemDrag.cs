@@ -17,8 +17,15 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public camera cam; //camera script
     public GameObject shedUI; //the ui part relating to shed storage
 
+    
+
     // Start is called before the first frame update
 
+
+    public void refreshWater()
+    {
+
+    }
     public void RefreshCount()
     {
         countUI.text = count.ToString();

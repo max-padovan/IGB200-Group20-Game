@@ -10,6 +10,9 @@ public class InventoryManager : MonoBehaviour
     //public invSlot[] hotbarSlots; maybe best not to distinguish
     public int stackSize = 10;
 
+
+    
+
     int selectedSlot = -1;
 
 
@@ -95,8 +98,9 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ChangeSlotSelected(24);
-        AddItem(items[1]);
+        ChangeSlotSelected(24); //make acive slot the players first inv slot
+        AddItem(items[1]); //spawn the shovel
+        AddItem(items[2]); //spawn the watering can
     }
 
     // Update is called once per frame
