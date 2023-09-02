@@ -47,7 +47,7 @@ public class water : MonoBehaviour
                 currentWaterStorage -= amountToRefill;
                 tank.setWaterStorage(currentWaterStorage);
             }
-            waterCount = maxWaterCan;
+            //waterCount = maxWaterCan;
         }
         else if (waterCount == maxWaterCan)
         {

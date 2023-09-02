@@ -11,7 +11,7 @@ public class BuyButton : MonoBehaviour
 
     public void PickupItem(int id)
     {
-        waterManager.UseWater(1);
+        waterManager.UseWater(5);
         
         Debug.Log(item[id]);
         bool result = inventoryManager.AddItem(item[id]);
