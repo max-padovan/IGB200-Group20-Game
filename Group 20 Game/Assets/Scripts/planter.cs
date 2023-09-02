@@ -35,7 +35,7 @@ public class planter : MonoBehaviour
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         cam = GameObject.Find("Main Camera").GetComponent<camera>();
         mesh = GetComponent<MeshRenderer>();
-        Debug.Log(original);
+        //Debug.Log(original);
 
         prepareBuildingPrefab();
     }
@@ -53,7 +53,7 @@ public class planter : MonoBehaviour
     {
         mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && cam.canPan)
         {
             Debug.Log("Clicked planter!");
 

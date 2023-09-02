@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerDownHandler
 {
     public Item item; //what item this is going to be
-    public int count = 1;
+    public int count = 0;
     public Text countUI;
     
 
@@ -17,33 +17,43 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public camera cam; //camera script
     public GameObject shedUI; //the ui part relating to shed storage
 
-    
+    //public water waterManager; //unity didn't like getting this
 
     // Start is called before the first frame update
 
 
-    public void refreshWater()
-    {
 
-    }
     public void RefreshCount()
     {
         countUI.text = count.ToString();
-        bool textActive = count > 1;
-        countUI.gameObject.SetActive(textActive);
+        if (item.actionType != Item.ActionType.water) //basically if it's not water, don't display the number if it's 1
+        {
+            bool textActive = count > 1;
+            countUI.gameObject.SetActive(textActive);
+        }
     }
     
     public void InitialiseItem(Item newItem)
     {
         
         //image = this.GetComponent<Image>();
-        Debug.Log(newItem);
+        //Debug.Log(newItem);
         item = newItem;
         image.sprite = newItem.icon;
         RefreshCount();
     }
     void Start()
     {
+        RefreshCount();
+        if(item.waterCapacity)
+        {
+            //count = waterManager.maxWaterCan;
+            Debug.Log("I'm water");
+        }
+        else
+        {
+            count = 1;
+        }
         image = GetComponent<Image>();
         //assigning object references
         cam = GameObject.Find("Main Camera").GetComponent<camera>();

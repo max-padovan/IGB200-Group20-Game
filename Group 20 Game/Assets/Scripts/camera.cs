@@ -16,6 +16,8 @@ public class camera : MonoBehaviour
     public bool runningCoroutine; //bool that is true when a coroutine is running
     public float mouseSensitivity = 3f; //changes the mouse pan sensitivity
 
+    
+
     //Angle vars
     public Quaternion currentAngle;
     float y;

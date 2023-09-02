@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -9,27 +10,43 @@ public class InventoryManager : MonoBehaviour
     public Item[] items;
     //public invSlot[] hotbarSlots; maybe best not to distinguish
     public int stackSize = 10;
+    public GameObject[] handItems;
 
 
-    
+    Item activeItem;
 
     int selectedSlot = -1;
 
-
+    public void changeHandItem(Item item)
+    {
+        for(int i = 0; i < handItems.Length; i++)
+        {
+            if (items[i] == item)
+            {
+                handItems[i].active = true;
+            }
+            else
+            {
+                handItems[i].active = false;
+            }
+        }
+    }
 
     void ChangeSlotSelected(int newSlot)
     {
+        
         if(selectedSlot >= 0)
         {
+            
             inventorySlots[selectedSlot].Deselect();
         }
         inventorySlots[newSlot].Select();
         selectedSlot = newSlot;
     }
-
+    
     public bool AddItem(Item item)
     {
-        Debug.Log(item);
+        //Debug.Log(item);
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             invSlot slot = inventorySlots[i];
@@ -59,12 +76,19 @@ public class InventoryManager : MonoBehaviour
     {
         GameObject newItemGameObject = Instantiate(inventoryItemPrefab, slot.transform);
         itemDrag inventoryItem = newItemGameObject.GetComponent<itemDrag>();
-        Debug.Log(item);
+        //Debug.Log(item);
         inventoryItem.InitialiseItem(item);
     }
     public Item GetItemRef(int ID)
     {
         return items[ID];
+    }
+
+    public itemDrag QuerySelectedItemDrag()
+    {
+        invSlot slot = inventorySlots[selectedSlot];
+        itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>();
+        return itemInSlot;
     }
     public Item QuerySelectedItem(bool use)
     {
@@ -99,16 +123,17 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         ChangeSlotSelected(24); //make acive slot the players first inv slot
-        AddItem(items[1]); //spawn the shovel
-        AddItem(items[2]); //spawn the watering can
     }
 
     // Update is called once per frame
     void Update()
     {
+        //this just keeps checking what's in the active slot
+        activeItem = QuerySelectedItem(false);
+        changeHandItem(activeItem);
 
         //checking user input to change the selected hotbar slot
-        if(Input.inputString != null)
+        if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int value);
             if (isNumber && value > 0 && value < 5) 

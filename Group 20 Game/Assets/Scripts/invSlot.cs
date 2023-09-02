@@ -9,6 +9,7 @@ public class invSlot : MonoBehaviour, IDropHandler
     public Image image;
     public Color selectedColour;
     public Color notSelectedColour;
+    public bool UIslot = false;
 
 
 

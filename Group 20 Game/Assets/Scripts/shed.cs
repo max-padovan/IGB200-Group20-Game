@@ -30,7 +30,7 @@ public class shed : MonoBehaviour
     void OnMouseOver()
     {
         mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && cam.canPan)
         {
             shedUI.SetActive(true);
             cam.canPan = false;
