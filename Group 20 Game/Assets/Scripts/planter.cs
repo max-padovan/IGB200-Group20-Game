@@ -23,10 +23,11 @@ public class planter : MonoBehaviour
     private GameObject placeholderPlantNode;
 
     public Material validPlacementMaterial;
+    private Vector3 placeHolderPlantNodeOffset = new Vector3(0, 0.7f, 0);
 
     public Vector3 nodePosition;
 
-    //public Grid grid;
+    public Grid grid;
     
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class planter : MonoBehaviour
     private void Update()
     {
         placePlantNode();
-        //gridManager();
+        gridManager();
         
         //isHome is managed by the camera script and is changed there...
         camOverPlanter = !cam.isHome;
@@ -55,8 +56,9 @@ public class planter : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Debug.Log("Clicked planter!");
-            
+
             //call function that moves camera to this location
+            Cursor.visible = false;
             cam.GetComponent<camera>().Move(this.transform.position,true);
         }
 
@@ -103,13 +105,13 @@ public class planter : MonoBehaviour
                 {
                     nodePosition = hit.point;
 
-                    //Update the position of the visual rep of the plantNode
-                    //placeholderPlantNode.transform.position = nodePosition;
-
                     //places an actual plantNode
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Instantiate(plantNode, nodePosition, Quaternion.identity);
+                        Instantiate(plantNode, new Vector3(placeholderPlantNode.transform.position.x,
+                                                           placeholderPlantNode.transform.position.y - 0.3f,
+                                                           placeholderPlantNode.transform.position.z),
+                                                           Quaternion.identity);
                     }
                 }
             }
@@ -118,13 +120,11 @@ public class planter : MonoBehaviour
                 placeholderPlantNode.SetActive(false);
             }
         }
-        
-        
     }
 
     public void gridManager()
     {
-        //Vector3Int gridPosition = grid.WorldToCell(nodePosition);
-        //placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition);
+        Vector3Int gridPosition = grid.WorldToCell(nodePosition);
+        placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition) + placeHolderPlantNodeOffset;
     }
 }

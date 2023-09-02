@@ -79,6 +79,7 @@ public class camera : MonoBehaviour
             //for returning to home pos
             if (Input.GetKeyDown(KeyCode.Escape) && !runningCoroutine)
             {
+                Cursor.visible = true;
                 Move(homePos, false);
                 y = 0;
                 isHome = true;               

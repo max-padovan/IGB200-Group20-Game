@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3108618138020928925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2005424990295435088}
+  - component: {fileID: 1694630733788306183}
+  m_Layer: 0
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2005424990295435088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108618138020928925}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.08691852, y: 1.0363171, z: 0.14095049}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2748645750867369289}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!156049354 &1694630733788306183
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108618138020928925}
+  m_Enabled: 1
+  m_CellSize: {x: 2.5, y: 2.5, z: 2.5}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
 --- !u!1 &5008017142989832273
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,7 +76,8 @@ Transform:
   m_LocalPosition: {x: 39.6, y: 0.46, z: 26}
   m_LocalScale: {x: 11.505028, y: 0.9649556, z: 7.0946894}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2005424990295435088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1650041817827532873
@@ -118,10 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e93d08ca467aa34797696978fff8ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   shovelID: 1
   inventoryManager: {fileID: 0}
-  camOverPlanter: 0
-  mouseOverPlanter: 0
   plantNode: {fileID: 8432203718682733306, guid: 9b76df9e35338dd4e9c4c2716cfacb95, type: 3}
   validPlacementMaterial: {fileID: 2100000, guid: 75d2b10deba094b45840190a1ad11df0, type: 2}
+  nodePosition: {x: 0, y: 0, z: 0}
+  grid: {fileID: 1694630733788306183}
