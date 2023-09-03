@@ -25,11 +25,13 @@ public class planter : MonoBehaviour
     public Material validPlacementMaterial;
     private Vector3 placeHolderPlantNodeOffset = new Vector3(0, 0.7f, 0);
 
-    public Vector3 nodePosition;
-
     public Grid grid;
-    
-    // Start is called before the first frame update
+    public Vector3 nodePosition;
+    private bool isFirstPlace = true;
+    private List<Vector3> nodePositions = new List<Vector3>();
+
+    private Vector3 pos;
+
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
@@ -43,8 +45,7 @@ public class planter : MonoBehaviour
     private void Update()
     {
         placePlantNode();
-        gridManager();
-        
+
         //isHome is managed by the camera script and is changed there...
         camOverPlanter = !cam.isHome;
     }
@@ -59,7 +60,7 @@ public class planter : MonoBehaviour
 
             //call function that moves camera to this location
             Cursor.visible = false;
-            cam.GetComponent<camera>().Move(this.transform.position,true);
+            cam.GetComponent<camera>().Move(this.transform.position, true);
         }
 
         mouseOverPlanter = true;
@@ -77,7 +78,7 @@ public class planter : MonoBehaviour
         {
             Destroy(placeholderPlantNode);
         }
-        
+
         placeholderPlantNode = Instantiate(plantNode);
 
         //set the colour of the plant node when first created
@@ -103,16 +104,53 @@ public class planter : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    nodePosition = hit.point;
+                    //Convert world position of palceHolderPlantNode to grid position (snaps to grid)
+                    Vector3Int gridPosition = grid.WorldToCell(hit.point);
+                    placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition) + placeHolderPlantNodeOffset; // <- provides a little offset to see where the "cursor" is
 
-                    //places an actual plantNode
+                    //places an actual plantNode at the above grid location and records its xz location
+                    /*
+                    if (Input.GetMouseButtonDown(0) && isFirstPlace == true)
+                    {
+                        pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                          placeholderPlantNode.transform.position.y - 0.3f,
+                                          placeholderPlantNode.transform.position.z);
+                        Instantiate(plantNode, pos, Quaternion.identity);
+
+                        isFirstPlace = false;
+                    }
+                    
+                    if (Input.GetMouseButtonDown(0) && isFirstPlace == false)
+                    {
+                        pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                          placeholderPlantNode.transform.position.y - 0.3f,
+                                          placeholderPlantNode.transform.position.z);
+
+                        List<Vector3> positionsToAdd = new List<Vector3>();
+                        nodePositions.Add(pos);
+
+                        foreach (Vector3 item in nodePositions)
+                        {
+                            float distance = Vector3.Distance(item, pos);
+
+                            if (distance > 0.5f)
+                            {
+                                positionsToAdd.Add(pos);
+                                nodePositions.AddRange(positionsToAdd);
+                                Instantiate(plantNode, pos, Quaternion.identity);
+                            }
+                        }
+                    }
+                    */
+
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Instantiate(plantNode, new Vector3(placeholderPlantNode.transform.position.x,
-                                                           placeholderPlantNode.transform.position.y - 0.3f,
-                                                           placeholderPlantNode.transform.position.z),
-                                                           Quaternion.identity);
+                        pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                          placeholderPlantNode.transform.position.y - 0.3f,
+                                          placeholderPlantNode.transform.position.z);
+                        Instantiate(plantNode, pos, Quaternion.identity);
                     }
+
                 }
             }
             else
@@ -120,11 +158,5 @@ public class planter : MonoBehaviour
                 placeholderPlantNode.SetActive(false);
             }
         }
-    }
-
-    public void gridManager()
-    {
-        Vector3Int gridPosition = grid.WorldToCell(nodePosition);
-        placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition) + placeHolderPlantNodeOffset;
     }
 }
