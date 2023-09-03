@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class planter : MonoBehaviour
@@ -32,22 +31,46 @@ public class planter : MonoBehaviour
 
     private Vector3 pos;
 
+    //Seed Variables ----------------
+    public GameObject testSeeds;
+
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         cam = GameObject.Find("Main Camera").GetComponent<camera>();
         mesh = GetComponent<MeshRenderer>();
-        //Debug.Log(original);
 
         prepareBuildingPrefab();
     }
 
     private void Update()
     {
-        placePlantNode();
+        if (camOverPlanter == true && mouseOverPlanter == true)
+        {
+            showMouseIndicator();
 
-        //isHome is managed by the camera script and is changed there...
-        camOverPlanter = !cam.isHome;
+            Item activeItem = inventoryManager.QuerySelectedItem(false);
+            //Item shovel = inventoryManager.GetItemRef(1); //this number will change
+            if (activeItem != null)
+            {
+                if (activeItem.actionType == Item.ActionType.dig)
+                {
+                    placePlantNode();
+                }
+
+                if (activeItem.actionType == Item.ActionType.plant)
+                {
+                    placeTestSeed();
+                }
+
+                if (activeItem.actionType == Item.ActionType.water)
+                {
+                    testSeeds.GetComponent<TestPlant>().waterCrop();
+                }
+            }
+        }
+
+        camOverPlanter = !cam.isHome; //isHome is managed by the camera script and is changed there...
     }
 
     void OnMouseOver()
@@ -70,6 +93,7 @@ public class planter : MonoBehaviour
     {
         mesh.material.color = original;
         mouseOverPlanter = false;
+        placeholderPlantNode.SetActive(false);
     }
 
     private void prepareBuildingPrefab() // lets the player move the plantNode or visula feedback
@@ -87,76 +111,77 @@ public class planter : MonoBehaviour
         placeholderPlantNode.SetActive(false);
     }
 
+    public void showMouseIndicator()
+    {
+        placeholderPlantNode.SetActive(true);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            //Convert world position of palceHolderPlantNode to grid position (snaps to grid)
+            Vector3Int gridPosition = grid.WorldToCell(hit.point);
+            placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition) + placeHolderPlantNodeOffset; // <- provides a little offset to see where the "cursor" is
+        }
+    }
+
     public void placePlantNode()
     {
-        Item activeItem = inventoryManager.QuerySelectedItem(false);
-        //Item shovel = inventoryManager.GetItemRef(1); //this number will change
-
-        if (activeItem != null) // just in case they aren't holding anything at all - avoid the error
+        /*
+        if (Input.GetMouseButtonDown(0) && isFirstPlace == true)
         {
-            //if the player has selected the planter (cam over it), has their mouse over the object (mouse over) and their tool has the dig type
-            if (camOverPlanter == true && mouseOverPlanter == true && activeItem.actionType == Item.ActionType.dig)
-            {
-                placeholderPlantNode.SetActive(true);
+            pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                placeholderPlantNode.transform.position.y - 0.3f,
+                                placeholderPlantNode.transform.position.z);
+            Instantiate(plantNode, pos, Quaternion.identity);
 
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit))
-                {
-                    //Convert world position of palceHolderPlantNode to grid position (snaps to grid)
-                    Vector3Int gridPosition = grid.WorldToCell(hit.point);
-                    placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition) + placeHolderPlantNodeOffset; // <- provides a little offset to see where the "cursor" is
-
-                    //places an actual plantNode at the above grid location and records its xz location
-                    /*
-                    if (Input.GetMouseButtonDown(0) && isFirstPlace == true)
-                    {
-                        pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                          placeholderPlantNode.transform.position.y - 0.3f,
-                                          placeholderPlantNode.transform.position.z);
-                        Instantiate(plantNode, pos, Quaternion.identity);
-
-                        isFirstPlace = false;
-                    }
+            isFirstPlace = false;
+        }
                     
-                    if (Input.GetMouseButtonDown(0) && isFirstPlace == false)
-                    {
-                        pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                          placeholderPlantNode.transform.position.y - 0.3f,
-                                          placeholderPlantNode.transform.position.z);
+        if (Input.GetMouseButtonDown(0) && isFirstPlace == false)
+        {
+            pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                placeholderPlantNode.transform.position.y - 0.3f,
+                                placeholderPlantNode.transform.position.z);
 
-                        List<Vector3> positionsToAdd = new List<Vector3>();
-                        nodePositions.Add(pos);
+            List<Vector3> positionsToAdd = new List<Vector3>();
+            nodePositions.Add(pos);
 
-                        foreach (Vector3 item in nodePositions)
-                        {
-                            float distance = Vector3.Distance(item, pos);
+            foreach (Vector3 item in nodePositions)
+            {
+                float distance = Vector3.Distance(item, pos);
 
-                            if (distance > 0.5f)
-                            {
-                                positionsToAdd.Add(pos);
-                                nodePositions.AddRange(positionsToAdd);
-                                Instantiate(plantNode, pos, Quaternion.identity);
-                            }
-                        }
-                    }
-                    */
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                          placeholderPlantNode.transform.position.y - 0.3f,
-                                          placeholderPlantNode.transform.position.z);
-                        Instantiate(plantNode, pos, Quaternion.identity);
-                    }
-
+                if (distance > 0.5f)
+                {
+                    positionsToAdd.Add(pos);
+                    nodePositions.AddRange(positionsToAdd);
+                    Instantiate(plantNode, pos, Quaternion.identity);
                 }
             }
-            else
-            {
-                placeholderPlantNode.SetActive(false);
-            }
+        }
+        */
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                placeholderPlantNode.transform.position.y - 0.3f,
+                                placeholderPlantNode.transform.position.z);
+            Instantiate(plantNode, pos, Quaternion.identity);
+        }
+    }
+
+    public void placeTestSeed()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //places an instance of plant where there is a plant node
+            //plantNode.GetComponent<plantNodeScript>().placeSeeds(testSeeds);
+
+            pos = new Vector3(placeholderPlantNode.transform.position.x,
+                                placeholderPlantNode.transform.position.y - 0.3f,
+                                placeholderPlantNode.transform.position.z);
+            Instantiate(testSeeds, pos, Quaternion.identity);
         }
     }
 }
