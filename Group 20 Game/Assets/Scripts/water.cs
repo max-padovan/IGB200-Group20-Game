@@ -29,7 +29,6 @@ public class water : MonoBehaviour
         Item activeItem = inventoryManager.QuerySelectedItem(false);
         if (activeItem != null && waterCount < maxWaterCan && activeItem.actionType == Item.ActionType.water)
         {
-
             Debug.Log("Refilling watering can!");
             int amountToRefill = maxWaterCan - waterCount; //how much it needs to be refilled by
 
@@ -39,7 +38,6 @@ public class water : MonoBehaviour
                 Debug.Log("You have run out of water in the tank!");
                 currentWaterStorage = 0;
                 tank.setWaterStorage(currentWaterStorage);
-
             }
             else
             {
@@ -57,7 +55,6 @@ public class water : MonoBehaviour
         {
             Debug.Log("Please hold your watering Can!");
         }
-
     }
 
     public void UpdateDailyGain(int newGain) //if the player upgrades how much they get per day
@@ -88,12 +85,8 @@ public class water : MonoBehaviour
         else
         {
             waterCount -= amount;
-
         }
     }
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -105,19 +98,11 @@ public class water : MonoBehaviour
     {
         wateringCan.count = waterCount;
         wateringCan.RefreshCount();
-        
-            
-        
     }
     // Update is called once per frame
     void Update()
     {
         findWateringCan();
-
-
         //refillButton.onClick.AddListener(refill);
     }
-
-
-
 }
