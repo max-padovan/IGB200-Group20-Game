@@ -8430,6 +8430,11 @@ MonoBehaviour:
   grid: {fileID: 2139986100}
   nodePosition: {x: 0, y: 0, z: 0}
   testSeeds: {fileID: 3632211844744509123, guid: 2436aa62f883c4c45bc68b50e86b8759, type: 3}
+  xGridPlaced: []
+  zGridPlaced: []
+  xGridSeeded: []
+  zGridSeeded: []
+  waterManager: {fileID: 898135112}
 --- !u!65 &656257570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20149,6 +20154,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1692850233371184381, guid: 782e50d739713c343a81d2ace868679e, type: 3}
+      propertyPath: waterManager
+      value: 
+      objectReference: {fileID: 898135112}
     - target: {fileID: 1692850233371184381, guid: 782e50d739713c343a81d2ace868679e, type: 3}
       propertyPath: inventoryManager
       value: 

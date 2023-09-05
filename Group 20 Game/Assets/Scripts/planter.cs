@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class planter : MonoBehaviour
 {
@@ -26,13 +27,26 @@ public class planter : MonoBehaviour
 
     public Grid grid;
     public Vector3 nodePosition;
-    private bool isFirstPlace = true;
+    
     private List<Vector3> nodePositions = new List<Vector3>();
 
     private Vector3 pos;
 
     //Seed Variables ----------------
     public GameObject testSeeds;
+
+    //public int[] xGridPlaced;
+    //public int[] zGridPlaced;
+    private bool hasSoilPlaced = false;
+    private bool hasSeedPlaced = false;
+    public List<float> xGridPlaced = new List<float>();
+    public List<float> zGridPlaced = new List<float>();
+
+    public List<float> xGridSeeded = new List<float>();
+    public List<float> zGridSeeded = new List<float>();
+
+
+    public water waterManager;
 
     void Start()
     {
@@ -65,7 +79,11 @@ public class planter : MonoBehaviour
 
                 if (activeItem.actionType == Item.ActionType.water)
                 {
-                    testSeeds.GetComponent<TestPlant>().waterCrop();
+                    //testSeeds.GetComponent<TestPlant>().waterCrop();
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        waterManager.UseWater(1);
+                    }
                 }
             }
         }
@@ -82,7 +100,8 @@ public class planter : MonoBehaviour
             Debug.Log("Clicked planter!");
 
             //call function that moves camera to this location
-            Cursor.visible = false;
+
+            //Cursor.visible = false; //ambiguous mention of Cursor? just commented out for now
             cam.GetComponent<camera>().Move(this.transform.position, true);
         }
 
@@ -164,10 +183,54 @@ public class planter : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                placeholderPlantNode.transform.position.y - 0.3f,
-                                placeholderPlantNode.transform.position.z);
-            Instantiate(plantNode, pos, Quaternion.identity);
+            //get the current position
+            float currentxPos = placeholderPlantNode.transform.position.x;
+            float currentzPos = placeholderPlantNode.transform.position.z;
+            float currentyPos = placeholderPlantNode.transform.position.y;
+            bool CanPlace = true;
+
+            //This is a fairly inefficient way of doing it
+            for (int x = 0;xGridPlaced.Count > x;x++)
+            {
+                //this only works if the grid is square?
+                if (xGridPlaced[x] == currentxPos && zGridPlaced[x] == currentzPos)
+                {
+                    //there's already a soil there
+                    //because we can only add the location to the array when the player puts it in
+                    CanPlace = false;
+                    break;
+
+                }
+                /*
+                for (int z = 0; zGridPlaced.Count > z; z++)
+                {
+                    
+                }
+
+                if (!CanPlace)
+                {
+                    break;
+                }
+                */
+            }
+            if(CanPlace)
+            {
+                //place the soil there, then add it to the gridPlaced lists so it won't be placed there again
+                pos = new Vector3(currentxPos, currentyPos - 0.3f, currentzPos);
+                Instantiate(plantNode, pos, Quaternion.identity);
+                xGridPlaced.Add(currentxPos);
+                zGridPlaced.Add(currentzPos);
+                //Debug.Log(currentxPos);
+                //Debug.Log(currentzPos);
+                for(int x = 0; xGridPlaced.Count > x; x++)
+                {
+                    //Debug.Log(xGridPlaced[x]);
+                }
+                
+
+            }
+            
+            
         }
     }
 
@@ -175,13 +238,62 @@ public class planter : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            float currentxPos = placeholderPlantNode.transform.position.x;
+            float currentzPos = placeholderPlantNode.transform.position.z;
+            float currentyPos = placeholderPlantNode.transform.position.y;
+            bool isSoil = false;
+            bool canPlant = true;
+
+            //Check first if it's got soil
+            for (int x = 0; xGridPlaced.Count > x; x++)
+            {
+                //this only works if the grid is square?
+                if (xGridPlaced[x] == currentxPos && zGridPlaced[x] == currentzPos)// Yes, there's soil
+                {
+                    isSoil = true;
+                    break;
+                }
+                
+            }
+
+
+            if (isSoil)
+            {
+                
+                //check for seed already there
+                for (int x = 0; xGridSeeded.Count > x; x++)
+                {
+                    //this only works if the grid is square?
+                    if (xGridSeeded[x] == currentxPos && zGridSeeded[x] == currentzPos)
+                    {
+                        //there's already a seed there
+                        //because we can only add the location to the array when the player puts it in
+                        canPlant = false;
+                        break;
+
+                    }
+
+                }
+                if (canPlant)
+                {
+                    //place the seed there, then add it to the gridSeeded lists so it won't be placed there again
+                    pos = new Vector3(currentxPos, currentyPos - 0.3f, currentzPos);
+                    Instantiate(testSeeds, pos, Quaternion.identity);
+                    xGridSeeded.Add(currentxPos);
+                    zGridSeeded.Add(currentzPos);
+                }
+            }
             //places an instance of plant where there is a plant node
             //plantNode.GetComponent<plantNodeScript>().placeSeeds(testSeeds);
 
-            pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                placeholderPlantNode.transform.position.y - 0.3f,
-                                placeholderPlantNode.transform.position.z);
-            Instantiate(testSeeds, pos, Quaternion.identity);
+
         }
+        //get the current position
+
+
+
+
+
+        
     }
 }
