@@ -37,6 +37,7 @@ public class watertank : MonoBehaviour
         setWaterStorage(waterManager.currentWaterStorage);
         //shedUI = GameObject.FindGameObjectWithTag("shedUI"); not gonna work if it starts toggled inactive, do it manually for now :)
         mesh = GetComponent<MeshRenderer>();
+        //original = mesh.GetComponent<Material>();
     }
 
     // Update is called once per frame

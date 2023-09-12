@@ -8,7 +8,7 @@ public class planter : MonoBehaviour
 {
     //Selection variables when isHome == true -----------------
     MeshRenderer mesh;
-    Color original = Color.white;
+    Color original = Color.white; //get component of its mesh ig
     Color hoverCol = Color.gray;
     private camera cam;
 
@@ -23,7 +23,7 @@ public class planter : MonoBehaviour
     private GameObject placeholderPlantNode;
 
     public Material validPlacementMaterial;
-    private Vector3 placeHolderPlantNodeOffset = new Vector3(0, 0.7f, 0);
+    private Vector3 placeHolderPlantNodeOffset = new Vector3(0.8f, -0.5f, 1f);
 
     public Grid grid;
     public Vector3 nodePosition;
@@ -53,6 +53,7 @@ public class planter : MonoBehaviour
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         cam = GameObject.Find("Main Camera").GetComponent<camera>();
         mesh = GetComponent<MeshRenderer>();
+        //original = mesh.GetComponent<Color>();
 
         prepareBuildingPrefab();
     }
@@ -94,7 +95,7 @@ public class planter : MonoBehaviour
     void OnMouseOver()
     {
         mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
-
+        //Debug.Log(cam.canPan);
         if (Input.GetMouseButtonUp(0) && cam.canPan)
         {
             Debug.Log("Clicked planter!");
@@ -140,6 +141,7 @@ public class planter : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             //Convert world position of palceHolderPlantNode to grid position (snaps to grid)
+            
             Vector3Int gridPosition = grid.WorldToCell(hit.point);
             placeholderPlantNode.transform.position = grid.CellToWorld(gridPosition) + placeHolderPlantNodeOffset; // <- provides a little offset to see where the "cursor" is
         }

@@ -47,7 +47,7 @@ public class camera : MonoBehaviour
         //initialising some values
         currentAngle = this.transform.rotation;
         homeAngle = Quaternion.Euler(10, 0, 0);
-        inspectAngle = Quaternion.Euler(35, 0, 0);
+        inspectAngle = Quaternion.Euler(45, 0, 0);
         homePos = transform.position;
         isHome = true; //Cam is in default position
         canPan = true; //
@@ -149,7 +149,7 @@ public class camera : MonoBehaviour
                 //isHome = false;
                 this.GetComponent<Camera>().fieldOfView = maxFOV;//reset fov, little jarring **************
                 posi = new Vector3(pos.x, pos.y + 7, pos.z - 7); //offset to see whole planter
-
+                canPan = false;
                 StartCoroutine(moveIn());
 
             }
@@ -200,6 +200,8 @@ public class camera : MonoBehaviour
         transform.rotation = homeAngle;
         currentAngle = homeAngle;
         runningCoroutine = false;
+
+        canPan = true; //so it happens AFTER it has finished moving back
 
         yield return null;
     }
