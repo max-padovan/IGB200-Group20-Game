@@ -21,6 +21,7 @@ public class water : MonoBehaviour
     public int dailyGain = 50;
 
     public InventoryManager inventoryManager;
+    public Notification notification;
     public itemDrag wateringCan; //Not sure if I'll need to get it or just make changes to its itemDrag
 
     public void refill() //Refill the amount in your watering can from the water tank
@@ -36,6 +37,7 @@ public class water : MonoBehaviour
             {
                 waterCount += currentWaterStorage;
                 Debug.Log("You have run out of water in the tank!");
+                notification.notif("You have run out of water in the tank!");
                 currentWaterStorage = 0;
                 tank.setWaterStorage(currentWaterStorage);
             }
@@ -50,10 +52,12 @@ public class water : MonoBehaviour
         else if (waterCount == maxWaterCan)
         {
             Debug.Log("Your watering can is already full");
+            notification.notif("Your watering can is already full");
         }
         else
         {
             Debug.Log("Please hold your watering Can!");
+            notification.notif("Please hold your watering Can!");
         }
     }
 
@@ -81,6 +85,7 @@ public class water : MonoBehaviour
         if(waterCount < amount)
         {
             Debug.Log("Sorry, you don't have that much water");
+            notification.notif("Sorry, you don't have that much water");
         }
         else
         {
