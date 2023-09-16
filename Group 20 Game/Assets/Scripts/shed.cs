@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class shed : MonoBehaviour
 {
-    MeshRenderer mesh;
-    Color original = Color.white;
-    Color hoverCol = Color.gray;
+    //MeshRenderer mesh;
+    //Color original = Color.white;
+    //Color hoverCol = Color.gray;
     public GameObject shedUI;
     public camera cam;
     // Start is called before the first frame update
     void Start()
     {
         //shedUI = GameObject.FindGameObjectWithTag("shedUI"); not gonna work if it starts toggled inactive, do it manually for now :)
-        mesh = GetComponent<MeshRenderer>();
+        //mesh = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class shed : MonoBehaviour
 
     void OnMouseOver()
     {
-        mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
+        //mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
         if (Input.GetMouseButtonUp(0) && cam.canPan)
         {
             shedUI.SetActive(true);
@@ -39,6 +39,6 @@ public class shed : MonoBehaviour
 
     void OnMouseExit()
     {
-        mesh.material.color = original;
+        //mesh.material.color = original;
     }
 }
