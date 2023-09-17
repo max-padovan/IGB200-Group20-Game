@@ -287,13 +287,11 @@ public class planter : MonoBehaviour
             }
             //places an instance of plant where there is a plant node
             //plantNode.GetComponent<plantNodeScript>().placeSeeds(testSeeds);
-
-
         }
         //get the current position
 
 
-
+        
 
 
         
