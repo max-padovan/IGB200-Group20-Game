@@ -4,32 +4,72 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    #region Plugs
     public GameObject book;
-    private bool isBookOpen = false;
+    private bool bookActive = false;
+
+    public GameObject shedUI;
+    private bool shedActive = false;
+
+    public GameObject waterUI;
+    private bool waterActive = false;
+
+    public camera cam;
+    #endregion
 
     void Start()
     {
-        //book.gameObject.SetActive(false);
+        book.SetActive(false);
+        shedUI.SetActive(false);
+        waterUI.SetActive(false);
     }
 
-    void Update()
+    #region Book
+    public void OpenBook() //Book Manager
     {
-        Book();
+        if (Input.GetKeyDown(KeyCode.Tab) && shedActive == false && waterActive == false)
+        {
+            bookActive = true;
+
+            book.SetActive(true);
+            shedUI.SetActive(false);
+            waterUI.SetActive(false);
+            cam.canPan = false;
+        }
     }
 
-    private void Book() //Book Manager
+    public void CloseBook() //Is used by the exit button in book
     {
+        bookActive = false;
         
-        if (Input.GetKeyDown(KeyCode.Tab) && isBookOpen == true)
-        {
-            book.gameObject.SetActive(true);
-            isBookOpen = false;
-        }
+        book.SetActive(false);
+        cam.canPan = true;
+    }
+    #endregion
 
-        if (Input.GetKeyDown(KeyCode.Tab) && isBookOpen == false)
+    #region Shed
+
+    public void ClickOnShed()
+    {
+        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && waterActive == false)
         {
-            book.gameObject.SetActive(false);
-            isBookOpen = true;
+            shedActive = true;
+        
+            shedUI.SetActive(true);
+            cam.canPan = false; 
         }
     }
+    
+    public void ClickOffShed()
+    {
+        if (Input.GetKey("escape") && shedActive == true && bookActive == false && waterActive == false)
+        {
+            shedActive = false;
+            
+            shedUI.SetActive(false);
+            cam.canPan = true;       
+        }
+    }
+
+    #endregion
 }
