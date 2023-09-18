@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,29 +14,31 @@ public class Book : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
+        Debug.Log("book is open");
     }
-
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab) && isMenuOpen == false) //open menu
-        {
-            isMenuOpen = !isMenuOpen; //set it to true
 
-            //Do menu things ----------------
-            shedUI.SetActive(false);
-            waterUI.SetActive(false);
-            cam.canPan = false;
-            gameObject.SetActive(true);
-            Debug.Log("it works"); 
-        }
-        
-        if (Input.GetKey(KeyCode.Tab) && isMenuOpen == true) //close the menu
-        {
-            isMenuOpen = !isMenuOpen; //set it to false
-            gameObject.SetActive(false);
-
-            cam.canPan = true;
-        }
     }
-}
+
+    private void showChild()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+            //Debug.Log(transform.GetChild(i));
+            //Debug.Log(transform.childCount);
+        }
+    }  
+    private void hideChild()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+            //Debug.Log(transform.GetChild(i));
+        }
+    }  
+}        
+            // shedUI.SetActive(false);
+//             waterUI.SetActive(false);
+//             cam.canPan = false;
