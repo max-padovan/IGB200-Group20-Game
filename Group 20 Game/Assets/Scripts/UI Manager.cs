@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     public GameObject waterUI;
     private bool waterActive = false;
 
+    public GameObject hotbar;
+
     public camera cam;
     #endregion
 
@@ -22,6 +24,12 @@ public class UIManager : MonoBehaviour
         book.SetActive(false);
         shedUI.SetActive(false);
         waterUI.SetActive(false);
+        hotbar.SetActive(true);
+    }
+
+    void Update()
+    {
+        OpenBook();
     }
 
     #region Book
@@ -35,6 +43,8 @@ public class UIManager : MonoBehaviour
             shedUI.SetActive(false);
             waterUI.SetActive(false);
             cam.canPan = false;
+
+            hotbar.SetActive(false);
         }
     }
 
@@ -44,6 +54,8 @@ public class UIManager : MonoBehaviour
         
         book.SetActive(false);
         cam.canPan = true;
+
+        hotbar.SetActive(true);
     }
     #endregion
 
@@ -60,7 +72,7 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    public void ClickOffShed()
+    public void ESCOffShed()
     {
         if (Input.GetKey("escape") && shedActive == true && bookActive == false && waterActive == false)
         {
@@ -70,6 +82,48 @@ public class UIManager : MonoBehaviour
             cam.canPan = true;       
         }
     }
+
+    public void ClickOffShed()
+    {
+        shedActive = false;
+        shedUI.SetActive(false);
+        cam.canPan = true;
+    }
+
+    #endregion
+
+    #region Water
+
+    public void ClickOnWater()
+    {
+        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && shedActive == false)
+        {
+            waterActive = true;
+            waterUI.SetActive(true);
+            cam.canPan = false;
+        }
+    }
+
+    public void ESCOffWater()
+    {
+        if (Input.GetKey("escape") && waterActive == true && bookActive == false && shedActive == false)
+        {
+            waterActive = false;
+            
+            waterUI.SetActive(false);
+            cam.canPan = true;
+        }
+    }
+
+    public void ClickOffWater()
+    {
+        waterActive = false;
+        waterUI.SetActive(false);
+        cam.canPan = true;
+    }
+
+
+
 
     #endregion
 }

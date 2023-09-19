@@ -8,13 +8,14 @@ public class shed : MonoBehaviour
     //Color original = Color.white;
     //Color hoverCol = Color.gray;
     public GameObject UIManager;
-    void Update()
-    {
-        UIManager.GetComponent<UIManager>().ClickOffShed();
-    }
 
     void OnMouseOver()
     {
         UIManager.GetComponent<UIManager>().ClickOnShed();
+    }
+
+    void Update()
+    {
+        UIManager.GetComponent<UIManager>().ESCOffShed();
     }
 }

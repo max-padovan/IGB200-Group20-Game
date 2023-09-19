@@ -15,9 +15,8 @@ public class watertank : MonoBehaviour
     public Slider slider;
     public Text value;
     public Text dailyGain;
-    
 
-
+public GameObject UIManager;
 
     public void setMaxStorage(int N)
     {
@@ -29,7 +28,6 @@ public class watertank : MonoBehaviour
         value.text = waterManager.currentWaterStorage + "/" + waterManager.maxWaterStorage;
     }
     
-
     // Start is called before the first frame update
     void Start()
     {
@@ -44,27 +42,12 @@ public class watertank : MonoBehaviour
     void Update()
     {
         //setWaterStorage(currentWaterStorage);
-        if (Input.GetKey("escape"))
-        {
-            waterUI.SetActive(false);
-            cam.canPan = true;
-
-        }
+        UIManager.GetComponent<UIManager>().ESCOffWater();
     }
 
     void OnMouseOver()
     {
         //mesh.material.color = hoverCol; //later change to an outline or glow - didn't bother with placeholder
-        if (Input.GetMouseButtonUp(0) && cam.canPan)
-        {
-            
-            waterUI.SetActive(true);
-            cam.canPan = false;
-        }
-    }
-
-    void OnMouseExit()
-    {
-        //mesh.material.color = original;
+        UIManager.GetComponent<UIManager>().ClickOnWater();
     }
 }
