@@ -5069,6 +5069,7 @@ MonoBehaviour:
   shedUI: {fileID: 1209112431}
   waterUI: {fileID: 1096792136}
   hotbar: {fileID: 163535848}
+  doorUI: {fileID: 1188717616}
   cam: {fileID: 963194229}
 --- !u!4 &357042937
 Transform:
@@ -8137,7 +8138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 569771072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830f94af73d7a364891661d4dc5f7042, type: 3}
+  m_Script: {fileID: 11500000, guid: c43989e9479b5d34c889373cb8671a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UIManager: {fileID: 357042935}
@@ -29250,7 +29251,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1812996483}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357042936}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ClickOffDay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1812996483
 MonoBehaviour:
   m_ObjectHideFlags: 0

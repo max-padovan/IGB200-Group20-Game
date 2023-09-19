@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject hotbar;
 
+    public GameObject doorUI;
+    private bool doorActive = false;
+
     public camera cam;
     #endregion
 
@@ -25,6 +28,7 @@ public class UIManager : MonoBehaviour
         shedUI.SetActive(false);
         waterUI.SetActive(false);
         hotbar.SetActive(true);
+        doorUI.SetActive(false);
     }
 
     void Update()
@@ -35,16 +39,17 @@ public class UIManager : MonoBehaviour
     #region Book
     public void OpenBook() //Book Manager
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && shedActive == false && waterActive == false)
+        if (Input.GetKeyDown(KeyCode.Tab) && shedActive == false && waterActive == false && doorActive == false)
         {
             bookActive = true;
 
             book.SetActive(true);
             shedUI.SetActive(false);
             waterUI.SetActive(false);
-            cam.canPan = false;
-
+            doorUI.SetActive(false);
             hotbar.SetActive(false);
+            
+            cam.canPan = false;
         }
     }
 
@@ -96,7 +101,7 @@ public class UIManager : MonoBehaviour
 
     public void ClickOnWater()
     {
-        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && shedActive == false)
+        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && shedActive == false && doorActive == false)
         {
             waterActive = true;
             waterUI.SetActive(true);
@@ -106,7 +111,7 @@ public class UIManager : MonoBehaviour
 
     public void ESCOffWater()
     {
-        if (Input.GetKey("escape") && waterActive == true && bookActive == false && shedActive == false)
+        if (Input.GetKey("escape") && waterActive == true && bookActive == false && shedActive == false && doorActive == false)
         {
             waterActive = false;
             
@@ -122,8 +127,36 @@ public class UIManager : MonoBehaviour
         cam.canPan = true;
     }
 
+    #endregion
 
+    #region Next Day
 
+    public void ClickOnDay()
+    {
+        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && shedActive == false && waterActive == false)
+        {
+            doorActive = true;
+            doorUI.SetActive(true);
+            cam.canPan = false;
+        }
+    }
 
+    public void ESCOffDay()
+    {
+        if (Input.GetKey("escape") && doorActive == true && bookActive == false && shedActive == false && waterActive == false)
+        {
+            doorActive = false;
+            
+            doorUI.SetActive(false);
+            cam.canPan = true;
+        }
+    }
+
+    public void ClickOffDay()
+    {
+        doorActive = false;
+        doorUI.SetActive(false);
+        cam.canPan = true;
+    }
     #endregion
 }
