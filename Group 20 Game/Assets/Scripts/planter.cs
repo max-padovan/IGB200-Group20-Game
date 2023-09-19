@@ -19,6 +19,9 @@ public class planter : MonoBehaviour
     //Grid variables ----------------------------
     private bool camOverPlanter = false;
     private bool mouseOverPlanter = false;
+    private bool mouseOverGridCube = false;
+    public GridCheck gridcheck;
+
     public GameObject plantNode;
     private GameObject placeholderPlantNode;
 
@@ -45,11 +48,12 @@ public class planter : MonoBehaviour
     public List<float> xGridSeeded = new List<float>();
     public List<float> zGridSeeded = new List<float>();
 
-
+    public Notification notification;
     public water waterManager;
 
     void Start()
     {
+        notification = GameObject.Find("NotificationManager").GetComponent<Notification>();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         cam = GameObject.Find("Main Camera").GetComponent<camera>();
         mesh = GetComponent<MeshRenderer>();
@@ -60,8 +64,11 @@ public class planter : MonoBehaviour
 
     private void Update()
     {
-        if (camOverPlanter == true && mouseOverPlanter == true)
+        mouseOverGridCube = gridcheck.isOverGrid;
+        Debug.Log(mouseOverGridCube);
+        if (camOverPlanter == true && mouseOverGridCube) // && mouseOverPlanter == true
         {
+            Debug.Log("yep");
             showMouseIndicator();
 
             Item activeItem = inventoryManager.QuerySelectedItem(false);
@@ -86,6 +93,14 @@ public class planter : MonoBehaviour
                         waterManager.UseWater(1);
                     }
                 }
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    notification.notif("You aren't holding a tool or seed");
+                }
+                
             }
         }
 
