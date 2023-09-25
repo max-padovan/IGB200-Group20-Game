@@ -26,7 +26,7 @@ public class planter : MonoBehaviour
     private GameObject placeholderPlantNode;
 
     public Material validPlacementMaterial;
-    private Vector3 placeHolderPlantNodeOffset = new Vector3(0.8f, -0.5f, 1f);
+    private Vector3 placeHolderPlantNodeOffset = new Vector3(0.8f, -0.5f, 1.2f);
 
     public Grid grid;
     public Vector3 nodePosition;

@@ -58,7 +58,7 @@ public class Notification : MonoBehaviour
     void Start()
     {
         //test
-        notif("meepo the sheepo");
+        //notif("meepo the sheepo");
         
 
     }

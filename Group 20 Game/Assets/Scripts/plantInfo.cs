@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Item")]
+[CreateAssetMenu(menuName = "Plant")]
 public class plantInfo : ScriptableObject
 {
     /// <summary>
