@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class planter : MonoBehaviour
 {
@@ -62,6 +63,19 @@ public class planter : MonoBehaviour
         prepareBuildingPrefab();
     }
 
+
+
+    private void PlantSeed(plantInfo plantinfo)
+    {
+        //refer to how items are initiated 
+        //something like this
+
+        //GameObject newSeed = Instantiate(seedprefab,transform);
+        //plant plant = newSeed.GetComponent<plant>();
+        
+        //plant.InitialisePlantinfo(plantinfo);
+    }
+
     private void Update()
     {
         mouseOverGridCube = gridcheck.isOverGrid;
@@ -82,7 +96,10 @@ public class planter : MonoBehaviour
 
                 if (activeItem.actionType == Item.ActionType.plant)
                 {
-                    placeTestSeed();
+                    PlantSeed(activeItem.plant);
+                    //placeTestSeed();
+                    //call a method for planting a seed
+                    //plantSeed(planter(this), activeItem.Plant)
                 }
 
                 if (activeItem.actionType == Item.ActionType.water)

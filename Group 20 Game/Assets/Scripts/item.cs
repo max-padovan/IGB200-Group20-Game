@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public ItemType type;
     public ActionType actionType;
 
+    public plantInfo plant;
     public bool stackable = true;
     public bool waterCapacity = false;
     // Start is called before the first frame update
