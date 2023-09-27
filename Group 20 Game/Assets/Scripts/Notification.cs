@@ -14,6 +14,7 @@ public class Notification : MonoBehaviour
     public float timer = 1.0f;
 
     public Animator notifAnim;
+    
 
     //not box collider... maybe button?
 

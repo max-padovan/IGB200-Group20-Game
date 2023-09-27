@@ -65,10 +65,10 @@ public class planter : MonoBehaviour
     private void Update()
     {
         mouseOverGridCube = gridcheck.isOverGrid;
-        Debug.Log(mouseOverGridCube);
+        //Debug.Log(mouseOverGridCube);
         if (camOverPlanter == true && mouseOverGridCube) // && mouseOverPlanter == true
         {
-            Debug.Log("yep");
+            //Debug.Log("yep");
             showMouseIndicator();
 
             Item activeItem = inventoryManager.QuerySelectedItem(false);
@@ -113,7 +113,7 @@ public class planter : MonoBehaviour
         //Debug.Log(cam.canPan);
         if (Input.GetMouseButtonUp(0) && cam.canPan)
         {
-            Debug.Log("Clicked planter!");
+            //Debug.Log("Clicked planter!");
 
             //call function that moves camera to this location
 
