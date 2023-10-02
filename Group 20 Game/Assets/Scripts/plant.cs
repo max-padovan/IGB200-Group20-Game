@@ -20,6 +20,7 @@ public class plant : MonoBehaviour
 
     void Start()
     {
+        dayManager = GameObject.Find("DayManager").GetComponent<DayManager>();
         health = plantinfo.plantHealth; //set the health to the max for this plant type
         amountWateredToday = 0;
         currentDay = dayManager.Day; // (getting the current day)
@@ -31,7 +32,8 @@ public class plant : MonoBehaviour
     {
         if(dayManager.Day > currentDay) //ie the player went to the next day
         {
-            plantAge++; //so it shouldn't be greater until they go next day again
+            currentDay++;//so it shouldn't be greater until they go next day again
+            plantAge++; 
             checkWaterReq(); //check the water, adjust health as necessary
             if(!rightPlanter) //basically just take health if it's not right
             {

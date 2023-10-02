@@ -20,7 +20,7 @@ public class plantInfo : ScriptableObject
     //and round it ofc
     
     public type plantName; //just as an enum in case we spell it wrong in editor ig?
-    public LightRequirement lightRequirement; // same deal, this just tells what type of planter it needs to be in
+    //public LightRequirement lightRequirement; // same deal, this just tells what type of planter it needs to be in
     public int waterRequirement; //its ideal water req/day
     public int maxFruit; // what the player actually gets will be a ratio of this * plant health
 
@@ -43,12 +43,14 @@ public class plantInfo : ScriptableObject
         Tomato,
         Carrot
     }
-    public enum LightRequirement
+
+    public int lightRequirement;
+/*    public enum LightRequirement
     {
         Full,
         Half,
         None
-    }
+    }*/
 
 
     // Start is called before the first frame update

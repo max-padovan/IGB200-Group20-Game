@@ -100,7 +100,7 @@ public class InventoryManager : MonoBehaviour
             if(use)
             {
                 itemInSlot.count--;
-                if(itemInSlot.count >= 0)
+                if (itemInSlot.count <= 0)
                 {
                     Destroy(itemInSlot.gameObject);
                 }
@@ -123,6 +123,8 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         ChangeSlotSelected(24); //make acive slot the players first inv slot
+        AddItem(items[3]);
+        AddItem(items[3]); AddItem(items[3]); AddItem(items[3]);
     }
 
     // Update is called once per frame

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89efa7a9d20dbc459b145e1ad6fb5a2, type: 3}
   m_Name: TomatoSeed
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: a967dc473a476cc42a0b7e17f9d3026e, type: 3}
+  icon: {fileID: 21300000, guid: 14c79305029bcfa43a7ee8bfd0cc2606, type: 3}
   type: 0
   actionType: 2
+  plant: {fileID: 11400000, guid: 7cabbdd433549a5469698dcd14b1adbe, type: 2}
   stackable: 1
+  waterCapacity: 0

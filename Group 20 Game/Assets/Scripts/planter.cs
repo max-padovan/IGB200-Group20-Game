@@ -26,6 +26,8 @@ public class planter : MonoBehaviour
     public GameObject plantNode;
     private GameObject placeholderPlantNode;
 
+    public GameObject plantPrefab;
+
     public Material validPlacementMaterial;
     private Vector3 placeHolderPlantNodeOffset = new Vector3(0.8f, -0.5f, 1.2f);
 
@@ -49,6 +51,8 @@ public class planter : MonoBehaviour
     public List<float> xGridSeeded = new List<float>();
     public List<float> zGridSeeded = new List<float>();
 
+    public int PlanterType; //0 for sun, 1 for half, 2 for shade
+
     public Notification notification;
     public water waterManager;
 
@@ -67,13 +71,73 @@ public class planter : MonoBehaviour
 
     private void PlantSeed(plantInfo plantinfo)
     {
-        //refer to how items are initiated 
-        //something like this
+        if (Input.GetMouseButtonDown(0))
+        {
+            float currentxPos = placeholderPlantNode.transform.position.x;
+            float currentzPos = placeholderPlantNode.transform.position.z;
+            float currentyPos = placeholderPlantNode.transform.position.y;
+            bool isSoil = false;
+            bool canPlant = true;
 
-        //GameObject newSeed = Instantiate(seedprefab,transform);
-        //plant plant = newSeed.GetComponent<plant>();
+            //Check first if it's got soil
+            for (int x = 0; xGridPlaced.Count > x; x++)
+            {
+                //this only works if the grid is square?
+                if (xGridPlaced[x] == currentxPos && zGridPlaced[x] == currentzPos)// Yes, there's soil
+                {
+                    isSoil = true;
+                    break;
+                }
+
+            }
+
+
+            if (isSoil)
+            {
+
+                //check for seed already there
+                for (int x = 0; xGridSeeded.Count > x; x++)
+                {
+                    //this only works if the grid is square?
+                    if (xGridSeeded[x] == currentxPos && zGridSeeded[x] == currentzPos)
+                    {
+                        //there's already a seed there
+                        //because we can only add the location to the array when the player puts it in
+                        canPlant = false;
+                        break;
+
+                    }
+
+                }
+                if (canPlant)
+                {
+                    Debug.Log("should remove 1 from inv");
+                    inventoryManager.QuerySelectedItem(true); //this isn't working properly and is removing ALL of the seeds in the stack
+                    pos = new Vector3(currentxPos, currentyPos - 0.3f, currentzPos);
+                    //place the seed there, then add it to the gridSeeded lists so it won't be placed there again
+                    GameObject newSeed = Instantiate(plantPrefab, pos, Quaternion.identity); //spawn in a generic plant object
+                    plant plantComponent = newSeed.GetComponent<plant>(); //get plant component of that specific new object so we can change things
+                    plantComponent.plantinfo = plantinfo; //set the plantinfo of this newly instantiated plant to the one corresponding to the seed used to plant it
+                    if(plantinfo.lightRequirement == PlanterType)
+                    {
+                        plantComponent.rightPlanter = true;
+                    }
+                    else
+                    {
+                        plantComponent.rightPlanter = false;
+                    }
+
+                    //Instantiate(plantNode, pos, Quaternion.identity);
+                    xGridSeeded.Add(currentxPos);
+                    zGridSeeded.Add(currentzPos);
+                }
+            }
+            //places an instance of plant where there is a plant node
+            //plantNode.GetComponent<plantNodeScript>().placeSeeds(testSeeds);
+        }
+
         
-        //plant.InitialisePlantinfo(plantinfo);
+       
     }
 
     private void Update()
@@ -98,8 +162,7 @@ public class planter : MonoBehaviour
                 {
                     PlantSeed(activeItem.plant);
                     //placeTestSeed();
-                    //call a method for planting a seed
-                    //plantSeed(planter(this), activeItem.Plant)
+
                 }
 
                 if (activeItem.actionType == Item.ActionType.water)
