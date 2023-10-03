@@ -168,6 +168,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 0}
   gridcheck: {fileID: 1449544864065159461}
   plantNode: {fileID: 8432203718682733306, guid: 9b76df9e35338dd4e9c4c2716cfacb95, type: 3}
+  plantPrefab: {fileID: 205188029005259782, guid: f35bd2a44f4346a4fb3cad87e534a1ee, type: 3}
   validPlacementMaterial: {fileID: 2100000, guid: 75d2b10deba094b45840190a1ad11df0, type: 2}
   grid: {fileID: 919247854402722295}
   nodePosition: {x: 0, y: 0, z: 0}
@@ -176,6 +177,9 @@ MonoBehaviour:
   zGridPlaced: []
   xGridSeeded: []
   zGridSeeded: []
+  xGridPlanted: []
+  zGridPlanted: []
+  notification: {fileID: 0}
   waterManager: {fileID: 0}
 --- !u!1 &5147765798522604353
 GameObject:

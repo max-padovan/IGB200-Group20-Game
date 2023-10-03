@@ -52,7 +52,7 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         else
         {
-            count = 1;
+            //count = 1;
         }
         image = GetComponent<Image>();
         //assigning object references
