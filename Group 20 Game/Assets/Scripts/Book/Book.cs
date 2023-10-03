@@ -21,11 +21,6 @@ public class Book : MonoBehaviour
         Debug.Log(currentPage);
     }
 
-    void Update()
-    {
-        
-    }
-
     public void NextPage() //Attached to the next page button
     {
         if (currentPage < Pages.Count - 1)
@@ -63,6 +58,7 @@ public class Book : MonoBehaviour
         Pages[lastOpenedPage].SetActive(true);
     }
 
+    #region Tabs
     public void HomeTab() //Called by first tab
     {
         Pages[currentPage].SetActive(false);
@@ -76,4 +72,25 @@ public class Book : MonoBehaviour
         // - or use another tab
         //Maybe put tab height logic in update
     }
+
+    public void TabOne()
+    {
+        Pages[currentPage].SetActive(false);
+        currentPage = 1; //Change this to change the page it opens
+        Debug.Log(currentPage);
+        Pages[currentPage].SetActive(true);
+        lastOpenedPage = currentPage;
+    }
+
+    public void TabTwo()
+    {
+        Pages[currentPage].SetActive(false);
+        currentPage = 2; //Change this to change the page it opens
+        Debug.Log(currentPage);
+        Pages[currentPage].SetActive(true);
+        lastOpenedPage = currentPage;
+    }
+
+    //Tab 3 eventually
+    #endregion
 }
