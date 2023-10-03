@@ -5,8 +5,9 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     #region Plugs
-    public GameObject book;
-    private bool bookActive = false;
+    public GameObject bookLower;
+    public GameObject bookUpper;
+    public bool bookActive = false;
 
     public GameObject shedUI;
     private bool shedActive = false;
@@ -24,7 +25,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        book.SetActive(false);
+        bookLower.SetActive(false);
+        bookUpper.SetActive(false);
         shedUI.SetActive(false);
         waterUI.SetActive(false);
         hotbar.SetActive(true);
@@ -43,7 +45,9 @@ public class UIManager : MonoBehaviour
         {
             bookActive = true;
 
-            book.SetActive(true);
+            bookLower.SetActive(true);
+            bookLower.GetComponent<Book>().openLastOpenedPage();
+            bookUpper.SetActive(true);
             shedUI.SetActive(false);
             waterUI.SetActive(false);
             doorUI.SetActive(false);
@@ -57,7 +61,8 @@ public class UIManager : MonoBehaviour
     {
         bookActive = false;
         
-        book.SetActive(false);
+        bookLower.SetActive(false);
+        bookUpper.SetActive(false);
         cam.canPan = true;
 
         hotbar.SetActive(true);
