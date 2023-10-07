@@ -25,6 +25,8 @@ public class plant : MonoBehaviour
         amountWateredToday = 0;
         currentDay = dayManager.Day; // (getting the current day)
         checkPlanter();
+        //Vector3 hm = new Vector3 (this.transform.position.x, this.transform.position.y+1, this.transform.position.z);
+        Instantiate(plantinfo.PlantStates[0], this.transform,false); //instantiate the seedling object
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class plant : MonoBehaviour
             checkWaterReq(); //check the water, adjust health as necessary
             if(!rightPlanter) //basically just take health if it's not right
             {
-                //AdjustHealth(-20); // Take some health ~~~~~~~~~~~~~~~~~~~~~~~~~ not sure how much
+                AdjustHealth(-40); // Take some health ~~~~~~~~~~~~~~~~~~~~~~~~~ not sure how much
             }
         }
     }

@@ -21300,6 +21300,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 777777074}
+    - target: {fileID: 5680990104560308997, guid: 05abfe9b1f5f679478bea78ed3cbf05f, type: 3}
+      propertyPath: plantPrefab
+      value: 
+      objectReference: {fileID: 3603722706176902099, guid: 3bb7c49b4e4fbed4c9afcd3c0f66f768, type: 3}
     - target: {fileID: 6291136557158861043, guid: 05abfe9b1f5f679478bea78ed3cbf05f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -36362,6 +36366,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 590691814}
+    - target: {fileID: 5680990104560308997, guid: 05abfe9b1f5f679478bea78ed3cbf05f, type: 3}
+      propertyPath: plantPrefab
+      value: 
+      objectReference: {fileID: 3603722706176902099, guid: 3bb7c49b4e4fbed4c9afcd3c0f66f768, type: 3}
     - target: {fileID: 5680990104560308997, guid: 05abfe9b1f5f679478bea78ed3cbf05f, type: 3}
       propertyPath: notification
       value: 

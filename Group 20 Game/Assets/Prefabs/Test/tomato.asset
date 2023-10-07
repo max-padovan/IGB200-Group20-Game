@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1c5034ddf97504597d999672db5552, type: 3}
   m_Name: tomato
   m_EditorClassIdentifier: 
-  plantHealth: 10
-  daysToGrow: 5
+  plantHealth: 100
+  daysToGrow: 7
   plantName: 0
-  lightRequirement: 0
   waterRequirement: 4
   maxFruit: 10
   minFruit: 3
@@ -27,3 +26,4 @@ MonoBehaviour:
   - {fileID: 5317916697082066937, guid: d795676754611704a884b24d485e51d3, type: 3}
   - {fileID: 1708452759483148392, guid: d3fa2d69b7259184bbdbc49a85816a61, type: 3}
   - {fileID: 6183387232197692350, guid: 97278fbcad84c7f41a91f1967699c726, type: 3}
+  lightRequirement: 0
