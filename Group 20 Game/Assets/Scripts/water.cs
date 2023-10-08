@@ -80,16 +80,18 @@ public class water : MonoBehaviour
         }
         tank.setWaterStorage(currentWaterStorage);
     }
-    public void UseWater(int amount)
+    public bool UseWater(int amount)
     {
         if(waterCount < amount)
         {
             Debug.Log("Sorry, you don't have that much water");
             notification.notif("Sorry, you don't have that much water");
+            return false;
         }
         else
         {
             waterCount -= amount;
+            return true;
         }
     }
 

@@ -11,11 +11,12 @@ public class watertank : MonoBehaviour
     public GameObject waterUI;
     public camera cam;
     public water waterManager;
+    //public DayManager dayManager;
 
     public Slider slider;
     public Text value;
     public Text dailyGain;
-
+    
 public GameObject UIManager;
 
     public void setMaxStorage(int N)
@@ -43,6 +44,7 @@ public GameObject UIManager;
     {
         //setWaterStorage(currentWaterStorage);
         UIManager.GetComponent<UIManager>().ESCOffWater();
+
     }
 
     void OnMouseOver()

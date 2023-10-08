@@ -12,7 +12,7 @@ public class DayManager : MonoBehaviour
     public bool isRaining;
     public Animator dayAnim;
     public Image BlackFade; //don't think I need this?
-
+    public water waterManager;
     public float timer = 2f;
     public bool disableFade = false;
     public UIManager UI;
@@ -24,10 +24,12 @@ public class DayManager : MonoBehaviour
     {
         if(!disableFade)
         {
+            waterManager.AddDailyGain();
             Day += 1;
             DayFade.SetActive(true);
             Debug.Log("Next day!");
             disableFade = true;
+
             StartCoroutine(beginFade());
         }
         

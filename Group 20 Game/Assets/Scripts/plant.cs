@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class plant : MonoBehaviour
@@ -11,22 +12,37 @@ public class plant : MonoBehaviour
     public int health; //the plants current health
     // Start is called before the first frame update
 
-    public bool alive = true;
+    
     public bool rightPlanter;
 
     public DayManager dayManager;
     public int currentDay;
     public int plantAge = 0;
+    GameObject CurrentObject;
+
+    int healthyLim;
+    int deadLim = 0;
+    int youngAgeLim;
+    int matureAgeLim;
+    int fruitingAgeLim;
+
+    bool ishealthy = true;
+    public bool alive = true;
 
     void Start()
     {
+        healthyLim = (int)Mathf.Floor(plantinfo.plantHealth/2); // so if it gets to half max, it's considered unhealthy
+        youngAgeLim = (int)Mathf.Floor(plantinfo.daysToGrow / 3); // if it gets to 1/3 of its grow time, it goes to young state
+        matureAgeLim = (int)Mathf.Floor(2 * plantinfo.daysToGrow / 3); // if it's 2/3 of grow time, goes to mature
+        fruitingAgeLim = plantinfo.daysToGrow; //if it reaches the full grow time, it's fruiting
+
         dayManager = GameObject.Find("DayManager").GetComponent<DayManager>();
         health = plantinfo.plantHealth; //set the health to the max for this plant type
         amountWateredToday = 0;
         currentDay = dayManager.Day; // (getting the current day)
         checkPlanter();
         //Vector3 hm = new Vector3 (this.transform.position.x, this.transform.position.y+1, this.transform.position.z);
-        Instantiate(plantinfo.PlantStates[0], this.transform,false); //instantiate the seedling object
+        CurrentObject = Instantiate(plantinfo.PlantStates[0], this.transform); //instantiate the seedling object
     }
 
     // Update is called once per frame
@@ -41,9 +57,67 @@ public class plant : MonoBehaviour
             {
                 AdjustHealth(-40); // Take some health ~~~~~~~~~~~~~~~~~~~~~~~~~ not sure how much
             }
+            RefreshObject();
+            amountWateredToday = 0; //reset back to 0
         }
+        
     }
 
+
+    void RefreshObject() //what we do is check if it meets any of the requirements to change appearance
+    {
+        //***I think it's going to delete and re-instantiate every plant at every day, could add a check within each if statement 
+        //checking to see if currentObject is already that type, and if it isn't we do the change, if it is, we just ignore it
+
+        ///0 = seedling
+        ///1 = young + healthy
+        ///2 = young + unhealthy
+        ///3 = mature + healthy
+        ///4 = mature + unhealthy
+        ///5 = fruiting
+        ///6 = dead
+        if(!alive)
+        {
+            Destroy(CurrentObject);
+            CurrentObject = Instantiate(plantinfo.PlantStates[6], this.transform, false);
+        }
+        else if (plantAge >= fruitingAgeLim)
+        {
+            Destroy(CurrentObject);
+            CurrentObject = Instantiate(plantinfo.PlantStates[5], this.transform, false);
+        }
+        else if(plantAge >= matureAgeLim)
+        {
+            if (!ishealthy)
+            {
+                Destroy(CurrentObject);
+                CurrentObject = Instantiate(plantinfo.PlantStates[4], this.transform, false);
+            }
+            else if (ishealthy)
+            {
+                Destroy(CurrentObject);
+                CurrentObject = Instantiate(plantinfo.PlantStates[3], this.transform, false);
+            }
+        }
+        else if(plantAge >= youngAgeLim)
+        {
+            if (!ishealthy)
+            {
+                Destroy(CurrentObject);
+                CurrentObject = Instantiate(plantinfo.PlantStates[2], this.transform, false);
+            }
+            else if (ishealthy)
+            {
+                Destroy(CurrentObject);
+                CurrentObject = Instantiate(plantinfo.PlantStates[1], this.transform, false);
+            }
+        }
+        else
+        {
+            //CurrentObject;
+        }
+        
+    }
     void AdjustHealth(int amount) //adjust the health, if it's taking away, make the unput NEGATIVE
     {
         //int missingHealth = plantinfo.plantHealth - health; 
@@ -52,21 +126,24 @@ public class plant : MonoBehaviour
         {
             health = plantinfo.plantHealth;
         }
-        else if(health < (plantinfo.plantHealth*0.66))
-        {
-            //change state stuff (unhealthy)
-        }
-        else if (health < (plantinfo.plantHealth * 0.33))
-        {
-            //change state stuff (very unhealthy~~ we might not add this state though)
-        }
         else if(health < 0)
         {
-            //the plant has died...
-            //set state to dead
+            //change state stuff (dead)
             alive = false;
-                //what does this actually do? Stop them from watering it? do they need to use a tool to clear it?
+            //healthStatus = "dead";
         }
+        else if (health < healthyLim)
+        {
+            //change state stuff (unhealthy)
+            ishealthy = false;
+        }
+        else
+        {
+            //plant is healthy still
+            ishealthy = true;
+
+        }
+
 
 
     }
@@ -83,18 +160,21 @@ public class plant : MonoBehaviour
             //int absDifference = amountWateredToday - plantinfo.waterRequirement; //take abs of this, think I need math thing
 
             // call at the end of the day, and check how much the plant has been watered vs its required amount and adjust the health based on that
-            if (amountWateredToday > plantinfo.waterRequirement)
+            if (amountWateredToday == plantinfo.waterRequirement)
             {
                 //overwatered. Do we punish excessive overwatering?
                 //perhaps don't take much/any if it was only 1
-            }
-            else if (amountWateredToday == plantinfo.waterRequirement)
-            {
-                //watered the perfect amount, give health
+                AdjustHealth(20);
             }
             else if (amountWateredToday == 0)
             {
                 //didn't water at all, big punishment?
+                AdjustHealth(-50);
+            }
+            else
+            {
+                //over or under watered by some amount
+                AdjustHealth(-(Mathf.Abs(amountWateredToday - plantinfo.waterRequirement) * 10)); //-10* amount over/underwatered
             }
         }
 

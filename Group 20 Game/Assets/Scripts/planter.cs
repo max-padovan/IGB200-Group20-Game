@@ -140,6 +140,31 @@ public class planter : MonoBehaviour
        
     }
 
+    private void waterOnce()
+    {
+        
+        int layer = 3;
+        int layerMask = 1 << layer;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100, layerMask))
+        {
+            //bool watered = waterManager.UseWater(1);
+            if (waterManager.UseWater(1))
+            {
+                Debug.Log(hit.transform.name);
+                plant wateringPlant = hit.transform.GetComponent<plant>();
+                wateringPlant.amountWateredToday += 1;
+                //notification.notif("Added 1 water to this plant");
+            }
+
+        }
+        else
+        {
+            notification.notif("You can only water the base of plants");
+        }
+    }
+
     private void Update()
     {
         mouseOverGridCube = gridcheck.isOverGrid;
@@ -170,7 +195,8 @@ public class planter : MonoBehaviour
                     //testSeeds.GetComponent<TestPlant>().waterCrop();
                     if (Input.GetMouseButtonDown(0))
                     {
-                        waterManager.UseWater(1);
+                        
+                        waterOnce();
                     }
                 }
             }

@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
         selectedSlot = newSlot;
     }
     
-    public bool AddItem(Item item)
+    public bool AddItem(Item item) //number doesn't really work
     {
         //Debug.Log(item);
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -124,7 +124,8 @@ public class InventoryManager : MonoBehaviour
     {
         ChangeSlotSelected(24); //make acive slot the players first inv slot
         AddItem(items[3]);
-        AddItem(items[3]); AddItem(items[3]); AddItem(items[3]);
+        AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]);
+        //AddItem(items[3], 10);
     }
 
     // Update is called once per frame
