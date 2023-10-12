@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     public GameObject doorUI;
     private bool doorActive = false;
 
+    public GameObject goalUI;
+    private bool goalActive = true;
+
     public camera cam;
     #endregion
 
@@ -31,6 +34,7 @@ public class UIManager : MonoBehaviour
         waterUI.SetActive(false);
         hotbar.SetActive(true);
         doorUI.SetActive(false);
+        goalUI.SetActive(true);
     }
 
     void Update()
@@ -52,6 +56,7 @@ public class UIManager : MonoBehaviour
             waterUI.SetActive(false);
             doorUI.SetActive(false);
             hotbar.SetActive(false);
+            goalUI.SetActive(false);
             
             cam.canPan = false;
         }
@@ -62,13 +67,16 @@ public class UIManager : MonoBehaviour
         bookActive = false;
         
         bookLower.SetActive(false);
+        bookLower.GetComponent<Book>().CloseBook();
         bookUpper.SetActive(false);
+
+
         cam.canPan = true;
 
         hotbar.SetActive(true);
+        goalUI.SetActive(true);
     }
     #endregion
-
     #region Shed
 
     public void ClickOnShed()
@@ -79,6 +87,8 @@ public class UIManager : MonoBehaviour
         
             shedUI.SetActive(true);
             cam.canPan = false; 
+
+            goalUI.SetActive(false);
         }
     }
     
@@ -89,7 +99,9 @@ public class UIManager : MonoBehaviour
             shedActive = false;
             
             shedUI.SetActive(false);
-            cam.canPan = true;       
+            cam.canPan = true;
+
+            goalUI.SetActive(true);
         }
     }
 
@@ -98,10 +110,11 @@ public class UIManager : MonoBehaviour
         shedActive = false;
         shedUI.SetActive(false);
         cam.canPan = true;
+
+        goalUI.SetActive(true);
     }
 
     #endregion
-
     #region Water
 
     public void ClickOnWater()
@@ -111,6 +124,8 @@ public class UIManager : MonoBehaviour
             waterActive = true;
             waterUI.SetActive(true);
             cam.canPan = false;
+
+            goalUI.SetActive(false);
         }
     }
 
@@ -122,6 +137,8 @@ public class UIManager : MonoBehaviour
             
             waterUI.SetActive(false);
             cam.canPan = true;
+
+            goalUI.SetActive(true);
         }
     }
 
@@ -130,10 +147,11 @@ public class UIManager : MonoBehaviour
         waterActive = false;
         waterUI.SetActive(false);
         cam.canPan = true;
+
+        goalUI.SetActive(true);
     }
 
     #endregion
-
     #region Next Day
 
     public void ClickOnDay()
@@ -143,6 +161,8 @@ public class UIManager : MonoBehaviour
             doorActive = true;
             doorUI.SetActive(true);
             cam.canPan = false;
+
+            goalUI.SetActive(false);
         }
     }
 
@@ -154,6 +174,8 @@ public class UIManager : MonoBehaviour
             
             doorUI.SetActive(false);
             cam.canPan = true;
+
+            goalUI.SetActive(true);
         }
     }
 
@@ -162,6 +184,8 @@ public class UIManager : MonoBehaviour
         doorActive = false;
         doorUI.SetActive(false);
         cam.canPan = true;
+
+        goalUI.SetActive(true);
     }
     #endregion
 }
