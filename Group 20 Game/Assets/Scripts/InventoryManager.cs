@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -23,11 +24,11 @@ public class InventoryManager : MonoBehaviour
         {
             if (items[i] == item)
             {
-                handItems[i].active = true;
+                handItems[i].SetActive(true);
             }
             else
             {
-                handItems[i].active = false;
+                handItems[i].SetActive(false);
             }
         }
     }
@@ -50,7 +51,7 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             invSlot slot = inventorySlots[i];
-            itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>();
+            itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>(); // this is how to see if there is an item in a slot!!!!!!!!!!!!!!
             if (itemInSlot!= null && itemInSlot.item == item && itemInSlot.item.stackable && itemInSlot.count < stackSize )
             {
                 itemInSlot.count++;
@@ -144,5 +145,35 @@ public class InventoryManager : MonoBehaviour
                 ChangeSlotSelected(value + 23); //+23 because of how the array of slots is stored, the hotbar ones are at the end
             }
         }
+    }
+
+
+
+    public bool hasItems(Item item, int amount = 1) // Used in goal definition
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            invSlot slot = inventorySlots[i];
+            itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>();
+            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count >= amount) //if the desired item is in the inventory
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int howMuchItem(Item item)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            invSlot slot = inventorySlots[i];
+            itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>();
+            if (itemInSlot != null && itemInSlot.item == item)
+            {
+                return itemInSlot.count;
+            }
+        }
+        return 999;
     }
 }
