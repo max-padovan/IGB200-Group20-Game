@@ -10,5 +10,8 @@ public class GoalDefinition : ScriptableObject
     public string goalExplanation;
     public Item item;
     public int amountToComplet;
-    [HideInInspector] public int currentAmount = 0;
+    [HideInInspector] public int currentAmount = 0; //is current amount of item untill completion of goal
+
+    public List<Item> rewardItems;
+    public List<Item> rewardUpgrades;
 }

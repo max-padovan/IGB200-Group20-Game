@@ -17,3 +17,5 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 4e914fca9d22ad8409cab0fa6b08b02e, type: 2}
   amountToComplet: 5
   currentAmount: 0
+  rewardItems: []
+  rewardUpgrades: []

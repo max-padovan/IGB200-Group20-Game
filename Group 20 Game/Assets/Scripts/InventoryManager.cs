@@ -13,9 +13,7 @@ public class InventoryManager : MonoBehaviour
     public int stackSize = 10;
     public GameObject[] handItems;
 
-
     Item activeItem;
-
     int selectedSlot = -1;
 
     public void changeHandItem(Item item)
@@ -32,7 +30,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-
     void ChangeSlotSelected(int newSlot)
     {
         
@@ -44,14 +41,13 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[newSlot].Select();
         selectedSlot = newSlot;
     }
-    
     public bool AddItem(Item item) //number doesn't really work
     {
         //Debug.Log(item);
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             invSlot slot = inventorySlots[i];
-            itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>(); // this is how to see if there is an item in a slot!!!!!!!!!!!!!!
+            itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>();
             if (itemInSlot!= null && itemInSlot.item == item && itemInSlot.item.stackable && itemInSlot.count < stackSize )
             {
                 itemInSlot.count++;
@@ -84,7 +80,6 @@ public class InventoryManager : MonoBehaviour
     {
         return items[ID];
     }
-
     public itemDrag QuerySelectedItemDrag()
     {
         invSlot slot = inventorySlots[selectedSlot];
@@ -117,19 +112,16 @@ public class InventoryManager : MonoBehaviour
             return null;
         }
     }
-    
-
-
-    // Start is called before the first frame update
     void Start()
     {
         ChangeSlotSelected(24); //make acive slot the players first inv slot
-        AddItem(items[3]);
-        AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]); AddItem(items[3]);
-        //AddItem(items[3], 10);
+        
+        //Add 10 tomato seeds
+        for (int i = 0; i < 10; i++)
+        {
+            AddItem(items[3]);
+        }
     }
-
-    // Update is called once per frame
     void Update()
     {
         //this just keeps checking what's in the active slot
@@ -146,9 +138,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-
-
-
     public bool hasItems(Item item, int amount = 1) // Used in goal definition
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -162,7 +151,6 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
-
     public int howMuchItem(Item item)
     {
         for (int i = 0; i < inventorySlots.Length; i++)

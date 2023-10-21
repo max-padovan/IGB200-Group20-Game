@@ -29,10 +29,10 @@ public class GoalManager : MonoBehaviour
         {
             if (currentGoal < goals.Count)
             {
-                Debug.Log("goal " + currentGoal + " completed");
+                Reward(currentGoal);
+                Debug.Log("Goal: " + currentGoal + " Completed!");
                 currentGoal ++;
-                
-                showGoalInfo(currentGoal); //show new goals info
+                showGoalInfo(currentGoal); //shows new goals info
             }
             else
             {
@@ -59,5 +59,13 @@ public class GoalManager : MonoBehaviour
         goalTitle.text = goals[currentGoal].goalName;
         goalDescription.text = goals[currentGoal].goalExplanation;
         goalProgress.text = goals[currentGoal].currentAmount.ToString() + " /" + goals[currentGoal].amountToComplet;
+    }
+
+    private void Reward(int currentGoal)
+    {
+        foreach(Item rewardItem in goals[currentGoal].rewardItems)
+        {
+            iManager.AddItem(rewardItem);
+        }
     }
 }
