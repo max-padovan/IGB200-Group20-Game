@@ -39380,6 +39380,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26cc59b4a6d9161409978cd4a0ae79d3, type: 2}
   - {fileID: 11400000, guid: 7905fb6f304a5e843b31b36e6f005750, type: 2}
   - {fileID: 11400000, guid: 4e914fca9d22ad8409cab0fa6b08b02e, type: 2}
+  - {fileID: 11400000, guid: 0f90c1db2fc34cf419384993ce607cbb, type: 2}
   stackSize: 10
   handItems:
   - {fileID: 485191283}
@@ -40523,6 +40524,10 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 2066817850}
+    - target: {fileID: 5680990104560308997, guid: 05abfe9b1f5f679478bea78ed3cbf05f, type: 3}
+      propertyPath: nodesPlaced.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6291136557158861043, guid: 05abfe9b1f5f679478bea78ed3cbf05f, type: 3}
       propertyPath: m_Mesh
       value: 

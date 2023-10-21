@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea1c5034ddf97504597d999672db5552, type: 3}
-  m_Name: tomato
+  m_Name: tomatoInfo
   m_EditorClassIdentifier: 
   plantHealth: 100
   daysToGrow: 7
   plantName: 0
   waterRequirement: 4
   maxFruit: 10
+  produce: {fileID: 11400000, guid: 0f90c1db2fc34cf419384993ce607cbb, type: 2}
   minFruit: 3
   PlantStates:
   - {fileID: 465714612873954681, guid: f97867718eaccce49bd36a20698d5820, type: 3}

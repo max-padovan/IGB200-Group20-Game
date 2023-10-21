@@ -44,7 +44,7 @@ public class GoalManager : MonoBehaviour
         {
             if (iManager.howMuchItem(goals[currentGoal].item) == 999)
             {
-                Debug.Log("ERROR: Item does not exist in players inventory, will return 999 as current amount in inventory under goal page in book");
+                //Debug.Log("ERROR: Item does not exist in players inventory, will return 999 as current amount in inventory under goal page in book");
             }
             else
             {

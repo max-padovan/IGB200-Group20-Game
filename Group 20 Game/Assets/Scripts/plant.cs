@@ -11,8 +11,11 @@ public class plant : MonoBehaviour
     public int amountWateredToday; //how much water it has been given today
     public int health; //the plants current health
     // Start is called before the first frame update
+    public InventoryManager inventoryManager;
 
-    
+    public int currentState = 0; //reference to what state it's in. Used when checking if we can clear it
+
+
     public bool rightPlanter;
 
     public DayManager dayManager;
@@ -31,11 +34,11 @@ public class plant : MonoBehaviour
 
     void Start()
     {
-        healthyLim = (int)Mathf.Floor(plantinfo.plantHealth/2); // so if it gets to half max, it's considered unhealthy
+        healthyLim = (int)Mathf.Floor(plantinfo.plantHealth / 2); // so if it gets to half max, it's considered unhealthy
         youngAgeLim = (int)Mathf.Floor(plantinfo.daysToGrow / 3); // if it gets to 1/3 of its grow time, it goes to young state
         matureAgeLim = (int)Mathf.Floor(2 * plantinfo.daysToGrow / 3); // if it's 2/3 of grow time, goes to mature
         fruitingAgeLim = plantinfo.daysToGrow; //if it reaches the full grow time, it's fruiting
-
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         dayManager = GameObject.Find("DayManager").GetComponent<DayManager>();
         health = plantinfo.plantHealth; //set the health to the max for this plant type
         amountWateredToday = 0;
@@ -48,21 +51,31 @@ public class plant : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dayManager.Day > currentDay) //ie the player went to the next day
+        if (dayManager.Day > currentDay) //ie the player went to the next day
         {
             currentDay++;//so it shouldn't be greater until they go next day again
-            plantAge++; 
+            plantAge++;
             checkWaterReq(); //check the water, adjust health as necessary
-            if(!rightPlanter) //basically just take health if it's not right
+            if (!rightPlanter) //basically just take health if it's not right
             {
                 AdjustHealth(-40); // Take some health ~~~~~~~~~~~~~~~~~~~~~~~~~ not sure how much
             }
             RefreshObject();
             amountWateredToday = 0; //reset back to 0
         }
-        
+
     }
 
+    public void harvestProduce()
+    {
+        //giving the items required
+        int produceAmount = (int)Mathf.Floor(plantinfo.maxFruit * health / 100); //the amount to give is dependent on the health
+        for (int i = 0; i < produceAmount; i++)
+        {
+            Debug.Log("Should add 1 produce");
+            inventoryManager.AddItem(plantinfo.produce);
+        }
+    }
 
     void RefreshObject() //what we do is check if it meets any of the requirements to change appearance
     {
@@ -80,11 +93,13 @@ public class plant : MonoBehaviour
         {
             Destroy(CurrentObject);
             CurrentObject = Instantiate(plantinfo.PlantStates[6], this.transform, false);
+            currentState = 6;
         }
         else if (plantAge >= fruitingAgeLim)
         {
             Destroy(CurrentObject);
             CurrentObject = Instantiate(plantinfo.PlantStates[5], this.transform, false);
+            currentState = 5;
         }
         else if(plantAge >= matureAgeLim)
         {
@@ -92,11 +107,13 @@ public class plant : MonoBehaviour
             {
                 Destroy(CurrentObject);
                 CurrentObject = Instantiate(plantinfo.PlantStates[4], this.transform, false);
+                currentState = 4;
             }
             else if (ishealthy)
             {
                 Destroy(CurrentObject);
                 CurrentObject = Instantiate(plantinfo.PlantStates[3], this.transform, false);
+                currentState = 3;
             }
         }
         else if(plantAge >= youngAgeLim)
@@ -105,11 +122,13 @@ public class plant : MonoBehaviour
             {
                 Destroy(CurrentObject);
                 CurrentObject = Instantiate(plantinfo.PlantStates[2], this.transform, false);
+                currentState = 2;
             }
             else if (ishealthy)
             {
                 Destroy(CurrentObject);
                 CurrentObject = Instantiate(plantinfo.PlantStates[1], this.transform, false);
+                currentState = 1;
             }
         }
         else

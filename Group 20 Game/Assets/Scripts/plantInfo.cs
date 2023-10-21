@@ -23,7 +23,7 @@ public class plantInfo : ScriptableObject
     //public LightRequirement lightRequirement; // same deal, this just tells what type of planter it needs to be in
     public int waterRequirement; //its ideal water req/day
     public int maxFruit; // what the player actually gets will be a ratio of this * plant health
-
+    public Item produce;
     public int minFruit; //just to make sure it doesn't go below this
 
     //we could have the amount of health lost for incorrect care change, or we can have it constant for all plants and just adjust its max health for balancing how hardy it is

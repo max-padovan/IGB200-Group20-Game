@@ -51,6 +51,11 @@ public class planter : MonoBehaviour
     public List<float> xGridSeeded = new List<float>();
     public List<float> zGridSeeded = new List<float>();
 
+    private List<GameObject> nodesPlaced = new List<GameObject>(); 
+    private List<GameObject> plantsPlaced = new List<GameObject>();
+    public int nodesPlacedNum = 0;
+    public int plantsPlacedNum = 0;
+
     public int PlanterType; //0 for sun, 1 for half, 2 for shade
 
     public Notification notification;
@@ -114,8 +119,10 @@ public class planter : MonoBehaviour
                     Debug.Log("should remove 1 from inv");
                     inventoryManager.QuerySelectedItem(true); //this isn't working properly and is removing ALL of the seeds in the stack
                     pos = new Vector3(currentxPos, currentyPos - 0.3f, currentzPos);
+                    //plantsPlaced.Add(Instantiate(plantPrefab, pos, Quaternion.identity));
+                    GameObject newSeed = Instantiate(plantPrefab, pos, Quaternion.identity);
                     //place the seed there, then add it to the gridSeeded lists so it won't be placed there again
-                    GameObject newSeed = Instantiate(plantPrefab, pos, Quaternion.identity); //spawn in a generic plant object
+                    //GameObject newSeed = Instantiate(plantPrefab, pos, Quaternion.identity); //spawn in a generic plant object
                     plant plantComponent = newSeed.GetComponent<plant>(); //get plant component of that specific new object so we can change things
                     plantComponent.plantinfo = plantinfo; //set the plantinfo of this newly instantiated plant to the one corresponding to the seed used to plant it
                     if(plantinfo.lightRequirement == PlanterType)
@@ -126,8 +133,10 @@ public class planter : MonoBehaviour
                     {
                         plantComponent.rightPlanter = false;
                     }
-
                     //Instantiate(plantNode, pos, Quaternion.identity);
+                    //plantsPlaced[plantsPlacedNum].GetComponent<plant>();
+                    plantsPlaced.Add(newSeed);
+                    plantsPlacedNum += 1;
                     xGridSeeded.Add(currentxPos);
                     zGridSeeded.Add(currentzPos);
                 }
@@ -270,40 +279,6 @@ public class planter : MonoBehaviour
 
     public void placePlantNode()
     {
-        /*
-        if (Input.GetMouseButtonDown(0) && isFirstPlace == true)
-        {
-            pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                placeholderPlantNode.transform.position.y - 0.3f,
-                                placeholderPlantNode.transform.position.z);
-            Instantiate(plantNode, pos, Quaternion.identity);
-
-            isFirstPlace = false;
-        }
-                    
-        if (Input.GetMouseButtonDown(0) && isFirstPlace == false)
-        {
-            pos = new Vector3(placeholderPlantNode.transform.position.x,
-                                placeholderPlantNode.transform.position.y - 0.3f,
-                                placeholderPlantNode.transform.position.z);
-
-            List<Vector3> positionsToAdd = new List<Vector3>();
-            nodePositions.Add(pos);
-
-            foreach (Vector3 item in nodePositions)
-            {
-                float distance = Vector3.Distance(item, pos);
-
-                if (distance > 0.5f)
-                {
-                    positionsToAdd.Add(pos);
-                    nodePositions.AddRange(positionsToAdd);
-                    Instantiate(plantNode, pos, Quaternion.identity);
-                }
-            }
-        }
-        */
-
         if (Input.GetMouseButtonDown(0))
         {
             //get the current position
@@ -311,49 +286,86 @@ public class planter : MonoBehaviour
             float currentzPos = placeholderPlantNode.transform.position.z;
             float currentyPos = placeholderPlantNode.transform.position.y;
             bool CanPlace = true;
+            bool isSeed = false;
 
             //This is a fairly inefficient way of doing it
             for (int x = 0;xGridPlaced.Count > x;x++)
             {
-                //this only works if the grid is square?
-                if (xGridPlaced[x] == currentxPos && zGridPlaced[x] == currentzPos)
+                if (xGridPlaced[x] == currentxPos && zGridPlaced[x] == currentzPos) //if we found the node
                 {
+                    for (int xx = 0; xGridSeeded.Count > xx; xx++)
+                    {
+                        if (xGridSeeded[xx] == currentxPos && zGridSeeded[xx] == currentzPos) //if we found the seed
+                        {
+                            isSeed = true; //not sure if I'll use this
+                            //there's already a seed there
+                            //remove the seed there
+                            plant plantRef = plantsPlaced[xx].GetComponent<plant>(); //reference to the script of the plant in this location
+                            ///0 = seedling
+                            ///1 = young + healthy
+                            ///2 = young + unhealthy
+                            ///3 = mature + healthy
+                            ///4 = mature + unhealthy
+                            ///5 = fruiting
+                            ///6 = dead
+                            if (plantRef.currentState == 0 || plantRef.currentState == 5 || plantRef.currentState == 6)
+                            {
+                                Debug.Log(plantRef.currentState);
+                                if(plantRef.currentState == 5)
+                                {
+                                    //give produce depending on health
+                                    plantRef.harvestProduce();
+                                }
+
+                                //it's in a state we can clear
+                                Destroy(plantsPlaced[xx]);
+                                plantsPlaced.RemoveAt(xx);
+                                xGridSeeded.RemoveAt(xx);
+                                zGridSeeded.RemoveAt(xx);
+                                Debug.Log("DESTROY PLANT");
+                                plantsPlacedNum--;
+
+                                //clear the node too
+                                Destroy(nodesPlaced[xx]);
+                                nodesPlaced.RemoveAt(xx);
+                                xGridPlaced.RemoveAt(xx);
+                                zGridPlaced.RemoveAt(xx);
+                                Debug.Log("DESTROY SOIL");
+                                CanPlace = false;
+                                nodesPlacedNum--;
+                                break;
+                            }
+
+                            break;
+                            //it's not in a state we can clear
+                        }
+                    }
                     //there's already a soil there
                     //because we can only add the location to the array when the player puts it in
-                    CanPlace = false;
-                    break;
+                    if(!isSeed) //no seed, relax
+                    {
+                        Destroy(nodesPlaced[x]);
+                        nodesPlaced.RemoveAt(x);
+                        xGridPlaced.RemoveAt(x);
+                        zGridPlaced.RemoveAt(x);
+                        Debug.Log("DESTROY SOIL");
+                        CanPlace = false;
+                        nodesPlacedNum--;
+                        break;
+                    }
+
 
                 }
-                /*
-                for (int z = 0; zGridPlaced.Count > z; z++)
-                {
-                    
-                }
-
-                if (!CanPlace)
-                {
-                    break;
-                }
-                */
             }
             if(CanPlace)
             {
                 //place the soil there, then add it to the gridPlaced lists so it won't be placed there again
                 pos = new Vector3(currentxPos, currentyPos - 0.3f, currentzPos);
-                Instantiate(plantNode, pos, Quaternion.identity);
+                nodesPlaced.Add(Instantiate(plantNode, pos, Quaternion.identity));
+                nodesPlacedNum += 1;
                 xGridPlaced.Add(currentxPos);
                 zGridPlaced.Add(currentzPos);
-                //Debug.Log(currentxPos);
-                //Debug.Log(currentzPos);
-                for(int x = 0; xGridPlaced.Count > x; x++)
-                {
-                    //Debug.Log(xGridPlaced[x]);
-                }
-                
-
             }
-            
-            
         }
     }
 
