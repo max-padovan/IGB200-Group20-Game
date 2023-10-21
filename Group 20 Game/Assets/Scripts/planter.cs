@@ -316,7 +316,7 @@ public class planter : MonoBehaviour
                                     //give produce depending on health
                                     plantRef.harvestProduce();
                                 }
-
+                                
                                 //it's in a state we can clear
                                 Destroy(plantsPlaced[xx]);
                                 plantsPlaced.RemoveAt(xx);
@@ -326,17 +326,17 @@ public class planter : MonoBehaviour
                                 plantsPlacedNum--;
 
                                 //clear the node too
-                                Destroy(nodesPlaced[xx]);
-                                nodesPlaced.RemoveAt(xx);
-                                xGridPlaced.RemoveAt(xx);
-                                zGridPlaced.RemoveAt(xx);
+                                Destroy(nodesPlaced[x]);
+                                nodesPlaced.RemoveAt(x);
+                                xGridPlaced.RemoveAt(x);
+                                zGridPlaced.RemoveAt(x);
                                 Debug.Log("DESTROY SOIL");
                                 CanPlace = false;
                                 nodesPlacedNum--;
-                                break;
+                                //break;
                             }
 
-                            break;
+                            //break;
                             //it's not in a state we can clear
                         }
                     }
