@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8830,7 +8830,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shovelID: 1
   inventoryManager: {fileID: 2066817850}
+  gridcheck: {fileID: 0}
   plantNode: {fileID: 8432203718682733306, guid: 9b76df9e35338dd4e9c4c2716cfacb95, type: 3}
+  plantPrefab: {fileID: 0}
   validPlacementMaterial: {fileID: 2100000, guid: 75d2b10deba094b45840190a1ad11df0, type: 2}
   grid: {fileID: 2139986100}
   nodePosition: {x: 0, y: 0, z: 0}
@@ -8839,6 +8841,10 @@ MonoBehaviour:
   zGridPlaced: []
   xGridSeeded: []
   zGridSeeded: []
+  nodesPlacedNum: 0
+  plantsPlacedNum: 0
+  PlanterType: 0
+  notification: {fileID: 0}
   waterManager: {fileID: 898135112}
 --- !u!65 &656257570
 BoxCollider:
@@ -12398,6 +12404,7 @@ MonoBehaviour:
   currentWaterStorage: 100
   dailyGain: 50
   inventoryManager: {fileID: 2066817850}
+  notification: {fileID: 0}
   wateringCan: {fileID: 502315598}
 --- !u!4 &898135113
 Transform:
