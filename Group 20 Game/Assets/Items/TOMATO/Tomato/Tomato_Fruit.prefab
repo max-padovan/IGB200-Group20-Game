@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407c3aa894e6c474999e070d9f20e008, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407c3aa894e6c474999e070d9f20e008, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407c3aa894e6c474999e070d9f20e008, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.844
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407c3aa894e6c474999e070d9f20e008, type: 3}
       propertyPath: m_LocalRotation.w
@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0da0cb01b6234618be1d833b5556296, type: 2}
     - target: {fileID: 919132149155446097, guid: 407c3aa894e6c474999e070d9f20e008, type: 3}
       propertyPath: m_Name
-      value: T_F Variant
+      value: Tomato_Fruit
       objectReference: {fileID: 0}
     - target: {fileID: 1395986736245044066, guid: 407c3aa894e6c474999e070d9f20e008, type: 3}
       propertyPath: m_Materials.Array.data[0]

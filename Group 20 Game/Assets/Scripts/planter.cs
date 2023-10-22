@@ -331,11 +331,11 @@ public class planter : MonoBehaviour
                                 xGridPlaced.RemoveAt(x);
                                 zGridPlaced.RemoveAt(x);
                                 Debug.Log("DESTROY SOIL");
-                                CanPlace = false;
+                                
                                 nodesPlacedNum--;
                                 //break;
                             }
-
+                            CanPlace = false;
                             //break;
                             //it's not in a state we can clear
                         }

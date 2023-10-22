@@ -15,7 +15,7 @@ MonoBehaviour:
   plantHealth: 100
   daysToGrow: 5
   plantName: 0
-  waterRequirement: 4
+  waterRequirement: 5
   maxFruit: 5
   produce: {fileID: 11400000, guid: 0f90c1db2fc34cf419384993ce607cbb, type: 2}
   minFruit: 3

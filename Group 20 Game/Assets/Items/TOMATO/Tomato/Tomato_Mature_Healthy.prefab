@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56a12ac2ed72c41a7b71f2deeb607c1d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.245
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56a12ac2ed72c41a7b71f2deeb607c1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.66
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56a12ac2ed72c41a7b71f2deeb607c1d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.677
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56a12ac2ed72c41a7b71f2deeb607c1d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0da0cb01b6234618be1d833b5556296, type: 2}
     - target: {fileID: 919132149155446097, guid: 56a12ac2ed72c41a7b71f2deeb607c1d, type: 3}
       propertyPath: m_Name
-      value: T_M_H Variant
+      value: Tomato_Mature_Healthy
       objectReference: {fileID: 0}
     - target: {fileID: 2586607309129781981, guid: 56a12ac2ed72c41a7b71f2deeb607c1d, type: 3}
       propertyPath: m_Materials.Array.data[0]

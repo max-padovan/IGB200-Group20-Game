@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d1896faa582f410b89d4fca5d7f2d23, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.32426
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d1896faa582f410b89d4fca5d7f2d23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d1896faa582f410b89d4fca5d7f2d23, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d1896faa582f410b89d4fca5d7f2d23, type: 3}
       propertyPath: m_LocalRotation.w
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2846131b70ca144f291a690063257802, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d1896faa582f410b89d4fca5d7f2d23, type: 3}
       propertyPath: m_Name
-      value: T_D Variant
+      value: Tomato_Dead
       objectReference: {fileID: 0}
     - target: {fileID: 3566390031902043909, guid: 0d1896faa582f410b89d4fca5d7f2d23, type: 3}
       propertyPath: m_Materials.Array.data[0]

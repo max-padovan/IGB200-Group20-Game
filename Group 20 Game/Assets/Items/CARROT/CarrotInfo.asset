@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CarrotInfo
   m_EditorClassIdentifier: 
   plantHealth: 100
-  daysToGrow: 5
+  daysToGrow: 7
   plantName: 2
-  waterRequirement: 4
+  waterRequirement: 3
   maxFruit: 5
   produce: {fileID: 11400000, guid: 71e3095896baa934fa7ba5a01eb4e31a, type: 2}
   minFruit: 3

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CucumberInfo
   m_EditorClassIdentifier: 
   plantHealth: 100
-  daysToGrow: 5
+  daysToGrow: 4
   plantName: 0
-  waterRequirement: 4
+  waterRequirement: 7
   maxFruit: 5
   produce: {fileID: 11400000, guid: 8b7ae9f1871bc174b8efb9b77f5e5e64, type: 2}
   minFruit: 3
@@ -27,4 +27,4 @@ MonoBehaviour:
   - {fileID: 5317916697082066937, guid: 4c493f459bbaade4a9152f2fcdccdc7b, type: 3}
   - {fileID: 1708452759483148392, guid: a8b53b802d5879d4aaad9075b5692093, type: 3}
   - {fileID: 6183387232197692350, guid: 5799a05313d9f8547aee47da77771b51, type: 3}
-  lightRequirement: 0
+  lightRequirement: 2

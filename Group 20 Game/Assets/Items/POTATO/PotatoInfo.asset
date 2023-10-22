@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PotatoInfo
   m_EditorClassIdentifier: 
   plantHealth: 100
-  daysToGrow: 5
+  daysToGrow: 9
   plantName: 0
-  waterRequirement: 4
+  waterRequirement: 8
   maxFruit: 5
   produce: {fileID: 11400000, guid: 2396a4ad41245684db5da4d0f87a9ad2, type: 2}
   minFruit: 3
@@ -27,4 +27,4 @@ MonoBehaviour:
   - {fileID: 5317916697082066937, guid: cdf5a8148f39ad64a9068181d7638efc, type: 3}
   - {fileID: 1708452759483148392, guid: 6b40fdc49f11c32499af94f602483530, type: 3}
   - {fileID: 6183387232197692350, guid: 86769a1b410c7d04ca2b642309ee9859, type: 3}
-  lightRequirement: 0
+  lightRequirement: 1
