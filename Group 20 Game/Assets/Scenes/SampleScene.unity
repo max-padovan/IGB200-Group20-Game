@@ -3966,6 +3966,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1381479037}
+    - target: {fileID: 4757113367912145085, guid: 516aecdd26e0c3e4ab00e5f1efd84584, type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757113367912145085, guid: 516aecdd26e0c3e4ab00e5f1efd84584, type: 3}
+      propertyPath: m_SelectedFaces.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757113367912145085, guid: 516aecdd26e0c3e4ab00e5f1efd84584, type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4779241982170380391, guid: 516aecdd26e0c3e4ab00e5f1efd84584, type: 3}
       propertyPath: m_Mesh
       value: 
