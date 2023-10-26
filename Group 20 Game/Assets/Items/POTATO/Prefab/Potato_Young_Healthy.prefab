@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.338
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.741
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0da0cb01b6234618be1d833b5556296, type: 2}
     - target: {fileID: 919132149155446097, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_Name
-      value: pyh Variant
+      value: Potato_Young_Healthy
       objectReference: {fileID: 0}
     - target: {fileID: 2338111585606429901, guid: c2ec7f12b8fc64a60aace9a286515db0, type: 3}
       propertyPath: m_Materials.Array.data[0]

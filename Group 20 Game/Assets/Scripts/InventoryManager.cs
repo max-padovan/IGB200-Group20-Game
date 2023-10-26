@@ -120,6 +120,9 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             AddItem(items[3]);
+            AddItem(items[5]);
+            AddItem(items[7]);
+            AddItem(items[9]);
         }
     }
     void Update()

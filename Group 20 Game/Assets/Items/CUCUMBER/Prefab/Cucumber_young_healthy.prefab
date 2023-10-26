@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fbc6d0f54be0a48cfb990a488a4809b5, type: 2}
     - target: {fileID: 919132149155446097, guid: 12104c89796c44edd9b58f754b116a20, type: 3}
       propertyPath: m_Name
-      value: CUYH Variant
+      value: Cucumber_young_healthy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

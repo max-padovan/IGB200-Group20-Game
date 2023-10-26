@@ -18,27 +18,27 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0da0cb01b6234618be1d833b5556296, type: 2}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.661
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.699
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_LocalRotation.w
@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0da0cb01b6234618be1d833b5556296, type: 2}
     - target: {fileID: 919132149155446097, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_Name
-      value: pmh Variant
+      value: Potato_Mature_Healthy
       objectReference: {fileID: 0}
     - target: {fileID: 1147130289132918698, guid: 0388af1cd29d94a1aa26ae7d21a33793, type: 3}
       propertyPath: m_Materials.Array.data[0]

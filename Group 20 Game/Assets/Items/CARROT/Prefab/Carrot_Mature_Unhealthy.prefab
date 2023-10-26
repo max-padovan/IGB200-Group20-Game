@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalScale.x
-      value: 18
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalScale.y
-      value: 18
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalScale.z
-      value: 18
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.265
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.787
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.257
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_LocalRotation.w
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1665154a12c4547568ea70637afea9f5, type: 2}
     - target: {fileID: 919132149155446097, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_Name
-      value: CMU Variant
+      value: Carrot_Mature_Unhealthy
       objectReference: {fileID: 0}
     - target: {fileID: 1170970068873931921, guid: 0f71a5f5389434209a0666924d4c5b42, type: 3}
       propertyPath: m_Materials.Array.data[0]

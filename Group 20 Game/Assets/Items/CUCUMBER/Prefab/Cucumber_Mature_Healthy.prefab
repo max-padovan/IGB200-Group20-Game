@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.547
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.597
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0da0cb01b6234618be1d833b5556296, type: 2}
     - target: {fileID: 919132149155446097, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_Name
-      value: CUMH Variant
+      value: Cucumber_Mature_Healthy
       objectReference: {fileID: 0}
     - target: {fileID: 2126410345220384643, guid: 9362bbe214abd446f857110d8682df1c, type: 3}
       propertyPath: m_Materials.Array.data[0]

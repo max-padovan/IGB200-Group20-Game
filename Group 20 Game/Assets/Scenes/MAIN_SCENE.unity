@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44956708, g: 0.4996428, b: 0.5756702, a: 1}
+  m_IndirectSpecularColor: {r: 0.44956738, g: 0.49964356, b: 0.575671, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -40268,6 +40268,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7905fb6f304a5e843b31b36e6f005750, type: 2}
   - {fileID: 11400000, guid: 4e914fca9d22ad8409cab0fa6b08b02e, type: 2}
   - {fileID: 11400000, guid: 0f90c1db2fc34cf419384993ce607cbb, type: 2}
+  - {fileID: 11400000, guid: 8b44736defded0f4ea7afafca708cef8, type: 2}
+  - {fileID: 11400000, guid: 71e3095896baa934fa7ba5a01eb4e31a, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: 8b7ae9f1871bc174b8efb9b77f5e5e64, type: 2}
+  - {fileID: 11400000, guid: ecc27070da4ddcb489aa57d19fdc4ab8, type: 2}
+  - {fileID: 11400000, guid: 2396a4ad41245684db5da4d0f87a9ad2, type: 2}
   stackSize: 10
   handItems:
   - {fileID: 485191283}
