@@ -21,10 +21,10 @@ MonoBehaviour:
   minFruit: 3
   PlantStates:
   - {fileID: 465714612873954681, guid: 2cda4382b8645124e81d690f5b58d0d9, type: 3}
-  - {fileID: 3082302114166750189, guid: 2c1ed3f7cb2a75c46b491716e967b57d, type: 3}
-  - {fileID: 4898070927462145993, guid: 09b5ed01bebcb854a9ecdf26ef941dbb, type: 3}
-  - {fileID: 4001758377762229978, guid: 6f3861887b37dc347a958d462908c83a, type: 3}
-  - {fileID: 5317916697082066937, guid: 4c493f459bbaade4a9152f2fcdccdc7b, type: 3}
-  - {fileID: 1708452759483148392, guid: a8b53b802d5879d4aaad9075b5692093, type: 3}
-  - {fileID: 6183387232197692350, guid: 5799a05313d9f8547aee47da77771b51, type: 3}
+  - {fileID: 3346060297837556133, guid: df2ecf6f14a254334ae66ee72e147daa, type: 3}
+  - {fileID: 374387665916591882, guid: 0c8857d6477ac482f97aa846e9ec4473, type: 3}
+  - {fileID: 3916282596768468592, guid: 73e77a36ee07542f6ab7286cac2ee931, type: 3}
+  - {fileID: 5271998871873022665, guid: 06ed0c9b77b9c409da5c28536bb26857, type: 3}
+  - {fileID: 8797957626305656714, guid: d07fd4d577e01498db87d5226c3f943a, type: 3}
+  - {fileID: 7471091833765466695, guid: a94dac03d3b9d4d8086893dd0a86430f, type: 3}
   lightRequirement: 2

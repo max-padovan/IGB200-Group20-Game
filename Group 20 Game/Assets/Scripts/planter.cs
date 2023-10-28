@@ -61,6 +61,14 @@ public class planter : MonoBehaviour
     public Notification notification;
     public water waterManager;
 
+
+    //audio stuff
+    public AudioSource waterSound;
+    public AudioSource digSound;
+    public AudioSource harvestSound;
+    public AudioSource errorSound;
+    public AudioSource removeSound;
+
     void Start()
     {
         notification = GameObject.Find("NotificationManager").GetComponent<Notification>();
@@ -161,6 +169,7 @@ public class planter : MonoBehaviour
             //bool watered = waterManager.UseWater(1);
             if (waterManager.UseWater(1))
             {
+                waterSound.Play();
                 Debug.Log(hit.transform.name);
                 plant wateringPlant = hit.transform.GetComponent<plant>();
                 wateringPlant.amountWateredToday += 1;
@@ -171,6 +180,7 @@ public class planter : MonoBehaviour
         else
         {
             notification.notif("You can only water the base of plants");
+            errorSound.Play();
         }
     }
 
@@ -190,6 +200,7 @@ public class planter : MonoBehaviour
                 if (activeItem.actionType == Item.ActionType.dig)
                 {
                     placePlantNode();
+                    
                 }
 
                 if (activeItem.actionType == Item.ActionType.plant)
@@ -310,6 +321,7 @@ public class planter : MonoBehaviour
                             ///6 = dead
                             if (plantRef.currentState == 0 || plantRef.currentState == 5 || plantRef.currentState == 6)
                             {
+                                harvestSound.Play(); //removing / harvesting
                                 Debug.Log(plantRef.currentState);
                                 if(plantRef.currentState == 5)
                                 {
@@ -344,6 +356,7 @@ public class planter : MonoBehaviour
                     //because we can only add the location to the array when the player puts it in
                     if(!isSeed) //no seed, relax
                     {
+                        removeSound.Play();
                         Destroy(nodesPlaced[x]);
                         nodesPlaced.RemoveAt(x);
                         xGridPlaced.RemoveAt(x);
@@ -365,6 +378,7 @@ public class planter : MonoBehaviour
                 nodesPlacedNum += 1;
                 xGridPlaced.Add(currentxPos);
                 zGridPlaced.Add(currentzPos);
+                digSound.Play();
             }
         }
     }

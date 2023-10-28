@@ -24,40 +24,53 @@ public class water : MonoBehaviour
     public Notification notification;
     public itemDrag wateringCan; //Not sure if I'll need to get it or just make changes to its itemDrag
 
+
+    //sounds
+    public AudioSource refillSound;
+    public AudioSource errorSound;
+
     public void refill() //Refill the amount in your watering can from the water tank
     {
         //watering can needs some missing + you must be holding it to refill
         Item activeItem = inventoryManager.QuerySelectedItem(false);
-        if (activeItem != null && waterCount < maxWaterCan && activeItem.actionType == Item.ActionType.water)
+        if (activeItem != null  && activeItem.actionType == Item.ActionType.water) //&& waterCount <= maxWaterCan
         {
-            Debug.Log("Refilling watering can!");
-            int amountToRefill = maxWaterCan - waterCount; //how much it needs to be refilled by
-
-            if (currentWaterStorage < amountToRefill)//if the amount in the tank isn't enough to fill completely
+            if (waterCount == maxWaterCan)
             {
-                waterCount += currentWaterStorage;
-                Debug.Log("You have run out of water in the tank!");
-                notification.notif("You have run out of water in the tank!");
-                currentWaterStorage = 0;
-                tank.setWaterStorage(currentWaterStorage);
+                Debug.Log("Your watering can is already full");
+                notification.notif("Your watering can is already full");
+                errorSound.Play();
             }
             else
             {
-                waterCount = maxWaterCan;
-                currentWaterStorage -= amountToRefill;
-                tank.setWaterStorage(currentWaterStorage);
+                Debug.Log("Refilling watering can!");
+                int amountToRefill = maxWaterCan - waterCount; //how much it needs to be refilled by
+
+                if (currentWaterStorage < amountToRefill)//if the amount in the tank isn't enough to fill completely
+                {
+                    waterCount += currentWaterStorage;
+                    Debug.Log("You have run out of water in the tank!");
+                    notification.notif("You have run out of water in the tank!");
+                    currentWaterStorage = 0;
+                    tank.setWaterStorage(currentWaterStorage);
+                    errorSound.Play();
+                }
+                else
+                {
+                    waterCount = maxWaterCan;
+                    currentWaterStorage -= amountToRefill;
+                    tank.setWaterStorage(currentWaterStorage);
+                    refillSound.Play();
+                }
+                //waterCount = maxWaterCan;
             }
-            //waterCount = maxWaterCan;
-        }
-        else if (waterCount == maxWaterCan)
-        {
-            Debug.Log("Your watering can is already full");
-            notification.notif("Your watering can is already full");
+
         }
         else
         {
             Debug.Log("Please hold your watering Can!");
             notification.notif("Please hold your watering Can!");
+            errorSound.Play();
         }
     }
 
