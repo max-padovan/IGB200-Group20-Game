@@ -5,7 +5,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 
-public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerDownHandler
+public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item; //what item this is going to be
     public int count = 0;
@@ -20,6 +20,8 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     //public water waterManager; //unity didn't like getting this
 
     // Start is called before the first frame update
+
+    public Text itemNameDisplay;
 
 
 
@@ -58,6 +60,7 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         //assigning object references
         cam = GameObject.Find("Main Camera").GetComponent<camera>();
         shedUI = GameObject.Find("shedUI");
+        itemNameDisplay = GameObject.Find("ItemMessage").GetComponent<Text>();
 
         //for testing
         //InitialiseItem(item);
@@ -69,13 +72,29 @@ public class itemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         
     }
 
+    public void OnPointerEnter(PointerEventData pointerEventData) //so when the player clicks on the item, they aren't panning
+    {
+        Debug.Log(this.item.name);
+        itemNameDisplay.text = item.name;
+    }
 
+
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        itemNameDisplay.text = "";
+    }
     public void OnPointerDown(PointerEventData pointerEventData) //so when the player clicks on the item, they aren't panning
     {
-        cam.canPan = false;
+        //cam.canPan = false;
+    }
+
+    public void OnPointerUp(PointerEventData pointerEventData) //so when the player clicks on the item, they aren't panning
+    {
+        //cam.canPan = true;
     }
     public void OnBeginDrag(PointerEventData eventData) //for when the player starts dragging the item
     {
+        cam.canPan = false;
         itemParent = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();

@@ -14,6 +14,11 @@ public class GoalManager : MonoBehaviour
     public Text goalDescription;
     public Text goalProgress;
 
+    public Notification notification;
+    public bool currentTaskComplete = false;
+    public AudioSource errorSound;
+    public AudioSource goalCompleteSound;
+
     void Start()
     {
         //iManager = GameObject.Find("inventoryManager").GetComponent<InventoryManager>();
@@ -24,6 +29,20 @@ public class GoalManager : MonoBehaviour
 
     void Update()
     {
+
+        int currentAmount = iManager.getItemCount(goals[currentGoal].item); //check how much the player currently has
+        goals[currentGoal].currentAmount = currentAmount; //update that value for the goal
+        showGoalInfo(currentGoal); //display the new value for the player
+
+        if ( currentAmount >= 1 && !currentTaskComplete) //if there's any at all
+        {
+            if (currentAmount >= goals[currentGoal].amountToComplet) //if it's enough for the goal
+            {
+                currentTaskComplete = true; //can now go submit the goal for rewards
+                notification.notif("You have the required produce for your task! Go to the journal to submit!");
+            }
+        }
+        /*
         //is there enough of this item to complete the goal?
         if (iManager.hasItems(goals[currentGoal].item, goals[currentGoal].amountToComplet))
         {
@@ -51,6 +70,35 @@ public class GoalManager : MonoBehaviour
                 goals[currentGoal].currentAmount = iManager.howMuchItem(goals[currentGoal].item);
                 showGoalInfo(currentGoal); //just update the current goals progress
             }
+        }
+        */
+    }
+
+
+    public void SubmitGoal()
+    {
+        if (currentGoal < goals.Count && currentTaskComplete) //they finished the current and there's another to do
+        {
+            goalCompleteSound.Play();
+            Reward(currentGoal);
+            notification.notif("Goal " + currentGoal + " Completed!");
+            Debug.Log("Goal: " + currentGoal + " Completed!");
+            currentTaskComplete = false;
+            currentGoal++;
+            showGoalInfo(currentGoal); //shows new goals info
+        }
+        else if(currentTaskComplete) //they finished the current but there's no more to do
+        {
+            goalCompleteSound.Play();
+            notification.notif("Congratulations! You've completed all the goals!");
+            Debug.Log("Youve completed all the goals");
+            //Show text that says youve completed all the goals in book
+        }
+        else //they haven't finished the current
+        {
+            errorSound.Play();
+            notification.notif("You haven't met the requirements yet! Keep farming.");
+            Debug.Log("You haven't met the requirements yet!");
         }
     }
 
