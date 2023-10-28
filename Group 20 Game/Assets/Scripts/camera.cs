@@ -26,7 +26,7 @@ public class camera : MonoBehaviour
 
     //FOV vars
     float FOV;
-    float maxFOV = 60;
+    float maxFOV = 50;
     float minFOV = 25;
 
     //LERP vars
@@ -56,9 +56,9 @@ public class camera : MonoBehaviour
         z = 0;
         y = 0;
         x = 10;
-        FOV = 60;
+        FOV = 50;
         posi = homePos;
-
+        Zoom();
         //planter = GameObject.Find()
     }
 
@@ -73,7 +73,7 @@ public class camera : MonoBehaviour
             if (canPan == true)
             {
                 Pan();
-                Zoom();
+                //Zoom();
             }
         }
         else
@@ -92,7 +92,7 @@ public class camera : MonoBehaviour
     private void Zoom() //camera zoom functionality
     {
         FOV -= Input.mouseScrollDelta.y * zoomScale;
-
+        Debug.Log(FOV);
         //conditions to limit zoom
         if (FOV > maxFOV) 
         { 

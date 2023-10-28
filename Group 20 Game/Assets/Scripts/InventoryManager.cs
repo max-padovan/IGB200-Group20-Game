@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject[] handItems;
 
     Item activeItem;
-    int selectedSlot = -1;
+    int selectedSlot = 24;
 
     public void changeHandItem(Item item)
     {
@@ -32,14 +32,25 @@ public class InventoryManager : MonoBehaviour
     }
     void ChangeSlotSelected(int newSlot)
     {
-        
-        if(selectedSlot >= 0)
+        inventorySlots[selectedSlot].Deselect();
+        if (newSlot >= 28)
         {
-            
-            inventorySlots[selectedSlot].Deselect();
+            selectedSlot = 24;
+            inventorySlots[selectedSlot].Select();
+            //selectedSlot = selectedSlot;
         }
-        inventorySlots[newSlot].Select();
-        selectedSlot = newSlot;
+        else if (newSlot <= 23)
+        {
+            selectedSlot = 27;
+            inventorySlots[selectedSlot].Select();
+            //  selectedSlot = selectedSlot;
+        }
+        else
+        {
+            inventorySlots[newSlot].Select();
+            selectedSlot = newSlot;
+        }
+
     }
     public bool AddItem(Item item) //number doesn't really work
     {
@@ -131,7 +142,19 @@ public class InventoryManager : MonoBehaviour
         activeItem = QuerySelectedItem(false);
         changeHandItem(activeItem);
 
+        if(Input.mouseScrollDelta.y > 0)
+        {
+            //Debug.Log("Scrolled Up");
+            ChangeSlotSelected(selectedSlot + 1);
+        }
+        else if(Input.mouseScrollDelta.y < 0)
+        {
+            //Debug.Log("Scrolled Down");
+            ChangeSlotSelected(selectedSlot - 1);
+        }
+
         //checking user input to change the selected hotbar slot
+        /*
         if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int value);
@@ -140,6 +163,7 @@ public class InventoryManager : MonoBehaviour
                 ChangeSlotSelected(value + 23); //+23 because of how the array of slots is stored, the hotbar ones are at the end
             }
         }
+        */
     }
     public bool hasItems(Item item, int amount = 1) // Used in goal definition
     {

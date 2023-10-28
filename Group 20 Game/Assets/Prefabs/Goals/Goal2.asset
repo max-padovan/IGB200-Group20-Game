@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e95e159ecb7b347bfe780d48fd1637, type: 3}
   m_Name: Goal2
   m_EditorClassIdentifier: 
-  goalName: Goal 2 Name
-  goalExplanation: Goal 2 explanation
-  item: {fileID: 11400000, guid: e20497fe8aff09c4aad6c0f974d1ec52, type: 2}
-  amountToComplet: 10
+  goalName: 5 Carrots
+  goalExplanation: You are required to grow carrot seeds and submit 5 carrots
+  item: {fileID: 11400000, guid: 71e3095896baa934fa7ba5a01eb4e31a, type: 2}
+  amountToComplet: 5
   currentAmount: 999
+  rewardItems: []
+  rewardUpgrades: []

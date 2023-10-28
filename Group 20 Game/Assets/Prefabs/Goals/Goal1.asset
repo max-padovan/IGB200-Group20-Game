@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e95e159ecb7b347bfe780d48fd1637, type: 3}
   m_Name: Goal1
   m_EditorClassIdentifier: 
-  goalName: Goal 1 Name
-  goalExplanation: Goal 1 explanation
-  item: {fileID: 11400000, guid: 4e914fca9d22ad8409cab0fa6b08b02e, type: 2}
+  goalName: 5 Tomatoes
+  goalExplanation: You are required to grow tomato seeds  and submit 5 tomatoes
+  item: {fileID: 11400000, guid: 0f90c1db2fc34cf419384993ce607cbb, type: 2}
   amountToComplet: 5
-  currentAmount: 0
-  rewardItems: []
+  currentAmount: 4
+  rewardItems:
+  - {fileID: 11400000, guid: 8b44736defded0f4ea7afafca708cef8, type: 2}
   rewardUpgrades: []
