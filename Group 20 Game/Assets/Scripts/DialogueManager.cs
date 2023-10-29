@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
-
+    public Dialogue StartingText;
     private Queue<string> sentences;
 
 
@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string> ();
+        //StartDialogue(hmm);
     }
 
     public void StartDialogue (Dialogue dialogue)
