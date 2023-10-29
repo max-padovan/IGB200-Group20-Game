@@ -170,16 +170,17 @@ public class InventoryManager : MonoBehaviour
 
     public int getItemCount(Item item)
     {
+        int count = 0; //using a count so it goes over every instance of an object, not just finding the first stack
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             invSlot slot = inventorySlots[i];
             itemDrag itemInSlot = slot.GetComponentInChildren<itemDrag>();
             if (itemInSlot != null && itemInSlot.item == item) //if the desired item is in the inventory
             {
-                return itemInSlot.count;
+                count += itemInSlot.count;
             }
         }
-        return 0;
+        return count;
     }
 
     public bool hasItems(Item item, int amount = 1) // Used in goal definition
