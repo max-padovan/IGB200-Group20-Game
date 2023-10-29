@@ -12,10 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e95e159ecb7b347bfe780d48fd1637, type: 3}
   m_Name: Goal2
   m_EditorClassIdentifier: 
-  goalName: 5 Carrots
-  goalExplanation: You are required to grow carrot seeds and submit 5 carrots
+  goalName: Carrot Time!
+  goalExplanation: You are required to grow carrot seeds and submit 5 carrots. You're
+    on your own this time, but the journal might help! Run out of seeds and you'll
+    have to restart!
   item: {fileID: 11400000, guid: 71e3095896baa934fa7ba5a01eb4e31a, type: 2}
   amountToComplet: 5
-  currentAmount: 999
-  rewardItems: []
+  currentAmount: 0
+  rewardItems:
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
+  - {fileID: 11400000, guid: b191dd66c3190b141aeb5aae4d441ec4, type: 2}
   rewardUpgrades: []

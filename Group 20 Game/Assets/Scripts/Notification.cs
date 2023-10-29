@@ -59,7 +59,7 @@ public class Notification : MonoBehaviour
     void Start()
     {
         //test
-        notif("Tomatoes require 5 water a day for optimal growth!");
+        notif("To begin, Call your parent over!");
         
 
     }

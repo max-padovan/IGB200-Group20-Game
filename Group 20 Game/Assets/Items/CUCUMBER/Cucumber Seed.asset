@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89efa7a9d20dbc459b145e1ad6fb5a2, type: 3}
   m_Name: Cucumber Seed
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 6cae0298428da284ab39e3ffb5f535ed, type: 3}
+  icon: {fileID: 21300000, guid: 6ae22a362beb97141ae54d7e9f23899c, type: 3}
   type: 0
   actionType: 2
   plant: {fileID: 11400000, guid: 22e1b9888f0ccdf4b82b7dc594ad64da, type: 2}

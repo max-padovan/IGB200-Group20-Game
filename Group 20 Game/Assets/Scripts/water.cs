@@ -99,6 +99,7 @@ public class water : MonoBehaviour
         {
             Debug.Log("Sorry, you don't have that much water");
             notification.notif("Sorry, you don't have that much water");
+            errorSound.Play();
             return false;
         }
         else

@@ -117,7 +117,10 @@ public class planter : MonoBehaviour
                         //there's already a seed there
                         //because we can only add the location to the array when the player puts it in
                         canPlant = false;
+                        notification.notif("There's already a plant here!");
+                        errorSound.Play();
                         break;
+
 
                     }
 
@@ -149,6 +152,11 @@ public class planter : MonoBehaviour
                     zGridSeeded.Add(currentzPos);
                 }
             }
+            else
+            {
+                notification.notif("Please use your shovel first!");
+                errorSound.Play();
+            }
             //places an instance of plant where there is a plant node
             //plantNode.GetComponent<plantNodeScript>().placeSeeds(testSeeds);
         }
@@ -170,7 +178,7 @@ public class planter : MonoBehaviour
             if (waterManager.UseWater(1))
             {
                 waterSound.Play();
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 plant wateringPlant = hit.transform.GetComponent<plant>();
                 wateringPlant.amountWateredToday += 1;
                 //notification.notif("Added 1 water to this plant");
@@ -225,6 +233,7 @@ public class planter : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     notification.notif("You aren't holding a tool or seed");
+                    errorSound.Play();
                 }
                 
             }
@@ -322,7 +331,7 @@ public class planter : MonoBehaviour
                             if (plantRef.currentState == 0 || plantRef.currentState == 5 || plantRef.currentState == 6)
                             {
                                 harvestSound.Play(); //removing / harvesting
-                                Debug.Log(plantRef.currentState);
+                                //Debug.Log(plantRef.currentState);
                                 if(plantRef.currentState == 5)
                                 {
                                     //give produce depending on health
