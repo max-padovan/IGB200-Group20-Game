@@ -8,13 +8,13 @@ using UnityEngine;
 public class camera : MonoBehaviour
 {
     public bool isHome; //A way of determining where the camera should be for now
-    private float panSpeed = 45; //how fast the panning is
+    private float panSpeed = 30; //how fast the panning is
     private float maxPanAngle = 0.5f; //how far left and right the player can pan to (~+-60 degrees when 0.5f)
     private float zoomScale = 1.5f; //how quickly the player zooms when scrolling...
 
     public bool canPan; //bool that checks if the player should be allowed to pan
     public bool runningCoroutine; //bool that is true when a coroutine is running
-    public float mouseSensitivity = 3f; //changes the mouse pan sensitivity
+    public float mouseSensitivity = 1f; //changes the mouse pan sensitivity
 
     
 

@@ -16,9 +16,59 @@ public class InventoryManager : MonoBehaviour
     Item activeItem;
     int selectedSlot = 24;
 
+    int activeHandItem = 3;
+
     public void changeHandItem(Item item)
     {
-        for(int i = 0; i < handItems.Length; i++)
+        //Debug.Log(item == null);
+        if (item != null)// || item.type != Item.ItemType.produce) // no hand item for this
+        {
+            if (item.type == Item.ItemType.produce && activeHandItem != 3) //if it's a seed (and wasn't already a seed)
+            {
+                handItems[activeHandItem].SetActive(false);
+                handItems[3].SetActive(true);
+                activeHandItem = 3;
+            }
+            if (item.type == Item.ItemType.seed && activeHandItem != 0) //if it's a seed (and wasn't already a seed)
+            {
+                handItems[activeHandItem].SetActive(false);
+                handItems[0].SetActive(true);
+                activeHandItem = 0;
+            }
+            else if (item.type == Item.ItemType.tool && activeHandItem != 1 && item.actionType == Item.ActionType.dig) //if it's a shovel
+            {
+                handItems[activeHandItem].SetActive(false);
+                handItems[1].SetActive(true);
+                activeHandItem = 1;
+            }
+            else if (item.type == Item.ItemType.tool && activeHandItem != 2 && item.actionType == Item.ActionType.water) //if it's a watering can
+            {
+                handItems[activeHandItem].SetActive(false);
+                handItems[2].SetActive(true);
+                activeHandItem = 2;
+            }
+        }
+        else if (activeHandItem !=3)
+        {
+            handItems[activeHandItem].SetActive(false);
+            activeHandItem = 3; //no item
+            handItems[3].SetActive(true);
+        }
+        /*
+        else if (item == null)
+        {
+            handItems[activeHandItem].SetActive(false);
+            activeHandItem = 3; //no item
+        }
+        else if (activeHandItem == 0 ||  activeHandItem == 1 || activeHandItem == 2)
+        {
+            handItems[activeHandItem].SetActive(false);
+            activeHandItem = 3; //no item
+        }
+        */
+
+        /*
+        for (int i = 0; i < handItems.Length; i++)
         {
             if (items[i] == item)
             {
@@ -29,6 +79,7 @@ public class InventoryManager : MonoBehaviour
                 handItems[i].SetActive(false);
             }
         }
+        */
     }
     void ChangeSlotSelected(int newSlot)
     {
@@ -54,7 +105,7 @@ public class InventoryManager : MonoBehaviour
     }
     public bool AddItem(Item item) //number doesn't really work
     {
-        //Debug.Log(item);
+
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             invSlot slot = inventorySlots[i];
@@ -84,7 +135,6 @@ public class InventoryManager : MonoBehaviour
     {
         GameObject newItemGameObject = Instantiate(inventoryItemPrefab, slot.transform);
         itemDrag inventoryItem = newItemGameObject.GetComponent<itemDrag>();
-        //Debug.Log(item);
         inventoryItem.InitialiseItem(item);
     }
     public Item GetItemRef(int ID)
@@ -140,17 +190,16 @@ public class InventoryManager : MonoBehaviour
     {
         //this just keeps checking what's in the active slot
         activeItem = QuerySelectedItem(false);
+
         changeHandItem(activeItem);
 
-        if(Input.mouseScrollDelta.y > 0)
+        if (Input.mouseScrollDelta.y > 0)
         {
-            //Debug.Log("Scrolled Up");
-            ChangeSlotSelected(selectedSlot + 1);
+            ChangeSlotSelected(selectedSlot - 1);
         }
         else if(Input.mouseScrollDelta.y < 0)
         {
-            //Debug.Log("Scrolled Down");
-            ChangeSlotSelected(selectedSlot - 1);
+            ChangeSlotSelected(selectedSlot + 1);
         }
 
         //checking user input to change the selected hotbar slot
