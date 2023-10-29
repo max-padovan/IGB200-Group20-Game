@@ -91,6 +91,24 @@ public class Book : MonoBehaviour
         lastOpenedPage = currentPage;
     }
 
+    public void TabThree()
+    {
+        Pages[currentPage].SetActive(false);
+        currentPage = 3; //Change this to change the page it opens
+        Debug.Log(currentPage);
+        Pages[currentPage].SetActive(true);
+        lastOpenedPage = currentPage;
+    }
+
+    public void TabFour()
+    {
+        Pages[currentPage].SetActive(false);
+        currentPage = 4; //Change this to change the page it opens
+        Debug.Log(currentPage);
+        Pages[currentPage].SetActive(true);
+        lastOpenedPage = currentPage;
+    }
+
     //Tab 3 eventually
     #endregion
 }
