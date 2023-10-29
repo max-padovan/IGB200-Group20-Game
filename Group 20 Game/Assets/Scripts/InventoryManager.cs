@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     int selectedSlot = 24;
 
     int activeHandItem = 3;
+    public AudioSource scroll;
 
     public void changeHandItem(Item item)
     {
@@ -196,10 +197,12 @@ public class InventoryManager : MonoBehaviour
         if (Input.mouseScrollDelta.y > 0)
         {
             ChangeSlotSelected(selectedSlot - 1);
+            scroll.Play();
         }
         else if(Input.mouseScrollDelta.y < 0)
         {
             ChangeSlotSelected(selectedSlot + 1);
+            scroll.Play();
         }
 
         //checking user input to change the selected hotbar slot

@@ -18,7 +18,7 @@ public class Book : MonoBehaviour
         //Load the last opened page
         Pages[lastOpenedPage].SetActive(true);
         currentPage = lastOpenedPage;
-        Debug.Log(currentPage);
+        //Debug.Log(currentPage);
     }
 
     public void NextPage() //Attached to the next page button

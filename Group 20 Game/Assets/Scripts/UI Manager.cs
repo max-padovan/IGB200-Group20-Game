@@ -35,13 +35,23 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        OpenBook();
+        if (bookActive && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab)))
+        {
+            //Debug.Log(shedActive);
+            CloseBook();
+        }
+        else
+        {
+            OpenBook();
+        }
+        
+
     }
 
     #region Book
     public void OpenBook() //Book Manager
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && shedActive == false && waterActive == false && doorActive == false)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab)) && shedActive == false && waterActive == false && doorActive == false && cam.canPan && bookActive == false)
         {
             bookActive = true;
 
@@ -75,7 +85,7 @@ public class UIManager : MonoBehaviour
 
     public void ClickOnShed()
     {
-        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && waterActive == false)
+        if (Input.GetMouseButtonUp(0) && cam.canPan && bookActive == false && waterActive == false && doorActive == false)
         {
             shedActive = true;
         
@@ -86,12 +96,13 @@ public class UIManager : MonoBehaviour
     
     public void ESCOffShed()
     {
-        if (Input.GetKey("escape") && shedActive == true && bookActive == false && waterActive == false)
+        if (Input.GetKey("escape") && shedActive == true && bookActive == false && waterActive == false && doorActive == false)
         {
             shedActive = false;
             
             shedUI.SetActive(false);
             cam.canPan = true;
+            //CloseBook(); //keeps opening it idk why
         }
     }
 

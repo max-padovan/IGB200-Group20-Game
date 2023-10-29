@@ -81,7 +81,7 @@ public class GoalManager : MonoBehaviour
         {
             goalCompleteSound.Play();
             Reward(currentGoal);
-            notification.notif("Goal " + currentGoal + " Completed!");
+            notification.notif("Goal " + (currentGoal+1) + " Completed!");
             Debug.Log("Goal: " + currentGoal + " Completed!");
             currentTaskComplete = false;
             currentGoal++;
@@ -97,7 +97,7 @@ public class GoalManager : MonoBehaviour
         else //they haven't finished the current
         {
             errorSound.Play();
-            notification.notif("You haven't met the requirements yet! Keep farming.");
+            notification.notif("You haven't met the requirements yet!");
             Debug.Log("You haven't met the requirements yet!");
         }
     }

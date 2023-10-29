@@ -2788,8 +2788,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Plants not receiveing its requirements will slowly die off. Dead plants
-    can be removed with the shovel.
+  m_text: Plants not that don't meet their daily requirements will slowly lose health.
+    Dead plants can be removed with the shovel.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3583,8 +3583,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use the shovel tool to dig holes to plant seeds. Using the shovel on holes
-    and/or plants will remove them. when plants are not ready to be harvested.
+  m_text: 'Use the shovel tool to dig holes. Using the shovel on holes and/or plants
+    will remove them if seedling, dead or ripe. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6842,8 +6842,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Refill your watering can from the water tank. You can only refill it when
-    you have your watering can equiped
+  m_text: Refill your watering can from the water tank. You must be holding it to
+    refill.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9083,8 +9083,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Each plant type will have its own amount of water requirements as well
-    as set number of days to fully grow to be harvestable.
+  m_text: 'Each plant type will have its own water requirements as well as set growth
+    period for it to be harvestable. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11621,7 +11621,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click and grag Items to interact and move them to your tool bar.
+  m_text: Drag Items to move them to your tool bar or back to storage.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11756,7 +11756,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Press Tab to open your Journal to view and accomplish task. You can also
-    view inforation about the plants you have grown.
+    view inforation about the plants you must grow. Use this to help you grow them
+    effectively!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13393,7 +13394,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Click on Planterbox / Shed/ Water Tank / Door to interact with them. Press
-    Esc key to exit from them.
+    the Esc key to exit from them.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17160,8 +17161,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: When plant are ready to be harvested, use your shovel to harvest them.
-    harvested crops will automatically be placed in the Shed.
+  m_text: When plants are ready to be harvested, use your shovel to harvest them.
+    harvested crops will automatically be placed in the shed.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
